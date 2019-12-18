@@ -9,7 +9,6 @@ class MyBoard extends CGFobject {
         for (var t = 0; t < 8; t++) {
             for(var j = 0; j < 8; j++) {
                 this.tiles.push(new MyTile(this.scene, t, j));
-                console.log('new tile');
             }
         }
     }

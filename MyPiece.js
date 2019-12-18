@@ -3,11 +3,11 @@ class MyPiece extends CGFobject {
         this.scene = scene;
         this.coordX = coordX;
         this.coordZ = coordZ;
+        this.tile = null; //getTile() para a coordenada X e Z
 
         this.piece = new MyHexagonalPrism(this.scene); //TEXTURA TAMBEM AQUI? 
 
-        //TRABALHO DO INCORRIGIVEL
-
+        //TRABALHO DO JUSTINO
     }
     display() {
         this.scene.pushMatrix();

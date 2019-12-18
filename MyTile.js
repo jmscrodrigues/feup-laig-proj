@@ -5,6 +5,7 @@ class MyTile extends CGFobject {
         this.scene = scene;
         this.coordX = coordX;
         this.coordZ = coordZ;
+        this.piece = null; //getPeca() para a coordenada X e Z
 
         this.plane = new MyPlane(scene, 60, 60);
 

@@ -22,11 +22,8 @@ class XMLscene extends CGFscene {
         this.enableTextures(true);
 
         //Initialize scene objects
-        this.board = new MyBoard(this);
-        this.tile = new MyTile(this, 3, 3);
-
-
-       
+        this.gameOrchestrator = new MyGameOrchestrator(this);
+    
 
     }
     
@@ -34,40 +31,22 @@ class XMLscene extends CGFscene {
 
     initLights() {
         this.lights[0].setPosition(0, 70, 0, 1);
-        this.lights[0].setAmbient(1.0, 0.8, 0.8, 1.0);
-        this.lights[0].setDiffuse(1.0, 0.8, 0.8, 1.0);
-        this.lights[0].setSpecular(1.0, 0.8, 0.8, 1.0);
-        this.lights[1].setConstantAttenuation(0.05);
+        this.lights[0].setAmbient(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setConstantAttenuation(0.05);
         this.lights[0].disable();
-        this.lights[0].setVisible(false);
+        this.lights[0].setVisible(true);
         this.lights[0].update();
-
-        this.lights[1].setPosition(0,70,0,1);
-        this.lights[1].setAmbient(0.1, 0.1, 0.1, 1.0);
-        this.lights[1].setDiffuse(0.1, 0.1, 0.1, 1.0);
-        this.lights[1].setSpecular(0.1, 0.1, 0.1, 1.0);
-        this.lights[1].setConstantAttenuation(0.6);
-        this.lights[1].disable();
-        this.lights[1].setVisible(false);
-        this.lights[1].update();
-
-        this.lights[2].setPosition(0,0.4,-1,1);
-        this.lights[2].setAmbient(0.8, 0.4, 0.4, 1.0);
-        this.lights[2].setDiffuse(0.8, 0.4, 0.4, 1.0);
-        this.lights[2].setSpecular(0.8, 0.4, 0.4, 1.0);
-        this.lights[2].setQuadraticAttenuation(0.6);
-        this.lights[2].disable();
-        this.lights[2].setVisible(false);
-        this.lights[2].update();
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(100, 100, 100), vec3.fromValues(0, 0, 0));
     }
 
     setDefaultAppearance() {
-        this.setAmbient(0.2, 0.4, 0.8, 1.0);
-        this.setDiffuse(0.2, 0.4, 0.8, 1.0);
-        this.setSpecular(0.2, 0.4, 0.8, 1.0);
+        this.setAmbient(1, 1, 1, 1.0);
+        this.setDiffuse(1, 1, 1, 1.0);
+        this.setSpecular(1, 1, 1, 1.0);
         this.setShininess(10.0);
     }
     display() {
@@ -86,8 +65,6 @@ class XMLscene extends CGFscene {
         this.setDefaultAppearance();
 
         this.lights[0].update();
-        this.lights[1].update();
-        this.lights[2].update();
         // ---- BEGIN Primitive drawing section
 
         this.board.display();
