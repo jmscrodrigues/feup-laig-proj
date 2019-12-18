@@ -11,6 +11,22 @@ class MyTile extends CGFobject {
 
     }
 
+    removePiece() {
+        this.piece = null;
+    }
+
+    setPiece(piece) {
+        this.piece = piece;
+    }
+
+    getCoordX() {
+        return this.coordX;
+    }
+
+    getCoordZ() {
+        return this.coordZ;
+    }
+
     display() {
         this.scene.pushMatrix();
         this.scene.translate(this.coordX, 0, this.coordZ);
