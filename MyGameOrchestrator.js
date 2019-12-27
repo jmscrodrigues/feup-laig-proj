@@ -16,7 +16,7 @@ class MyGameOrchestrator {
         this.board = new MyBoard(this.scene);
         //this.theme = new MySceneGraph(this.scene);  ADD MySceneGraph with the needed changes
         //this.prolog = new MyPrologInterface(); ADD MyPrologInteface
-        //this.animator = new MyAnimator(); ADD MyAnimator
+        this.animator = new MyAnimator(this.scene);
         //this.gameSequence = new MyGameSequence(); ADD MyGameSequence
 
     }
