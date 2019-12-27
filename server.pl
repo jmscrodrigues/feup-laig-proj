@@ -112,6 +112,10 @@ parse_input(startGame(P1, P2), ok) :-
 	startGame(P1, P2).
 
 
+parse_input(startGame(P1, Hard, P2), ok) :-
+	startGame(P1, Hard, P2).
+
+
 parse_input(quit, goodbye).
 
 
