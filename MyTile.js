@@ -29,8 +29,8 @@ class MyTile extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.translate(this.coordX, 0, this.coordZ);
-        this.scene.scale(20,1,20);
+        //this.scene.scale(20,1,20);
+        this.scene.translate(this.coordX, 0, this.coordZ);      
         this.plane.display();
         this.scene.popMatrix();
     }
