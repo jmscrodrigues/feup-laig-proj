@@ -108,12 +108,24 @@ print_header_line(_).
 parse_input(handshake, handshake).
 parse_input(test(C,N), Res) :- test(C,Res,N).
 
-parse_input(startGame(P1, P2), ok) :-
-	startGame(P1, P2).
+parse_input(valid_moves(Board), List) :- valid_moves(Board, List).
+
+parse_input(board(), Board) :- board(B), fillBoard(B,Board).
+
+parse_input(move(X,Y,Board), [BoardOut,Peca]) :- move(X,Y,Board, BoardOut, Peca).
+
+parse_input(makePlayAIEasy(Board,List,ValidMoves), BoardOut, Lfinal) :- makePlayAI('AI', Board, BoardOut, List, Lfinal, ValidMoves, 0).
+
+parse_input(makePlayAIHard(Board,List,ValidMoves), BoardOut, Lfinal) :- makePlayAI('AI', Board, BoardOut, List, Lfinal, ValidMoves, 1).
+
+parse_input(addToList(L,Peca), Lfinal) :- addToList(L,Peca,Lfinal).
+
+% parse_input(gameOver(L1,L2))
 
 
-parse_input(startGame(P1, Hard, P2), ok) :-
-	startGame(P1, Hard, P2).
+
+
+
 
 
 parse_input(quit, goodbye).

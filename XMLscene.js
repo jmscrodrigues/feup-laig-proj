@@ -23,6 +23,9 @@ class XMLscene extends CGFscene {
 
         //Initialize scene objects
         this.gameOrchestrator = new MyGameOrchestrator(this);
+
+        this.setPickEnabled(true);
+
     
 
     }
@@ -49,7 +52,13 @@ class XMLscene extends CGFscene {
         this.setSpecular(1, 1, 1, 1.0);
         this.setShininess(10.0);
     }
+
+
     display() {
+
+        this.gameOrchestrator.logPicking();
+        this.clearPickRegistration();
+        
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -67,7 +76,8 @@ class XMLscene extends CGFscene {
         this.lights[0].update();
         // ---- BEGIN Primitive drawing section
 
-        this.board.display();
+        
+        this.gameOrchestrator.display();
         // ---- END Primitive drawing section
     }
 }

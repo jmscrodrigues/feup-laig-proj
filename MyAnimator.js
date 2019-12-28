@@ -1,6 +1,5 @@
 class MyAnimator {
     constructor(scene) {
-        super(scene);
         this.scene = scene;
         this.animations = [];
     }

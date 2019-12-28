@@ -16,13 +16,22 @@ class MyBoard extends CGFobject {
 
         this.boardBorder = new MyBoardBorder(this.scene);
 
+        this.index = 0;
+
         for (var t = 0; t < 8; t++) {
             for(var j = 0; j < 8; j++) {
-                this.tiles.push(new MyTile(this.scene, t, j));
+                this.tile = new MyTile(this.scene, t, j);
+                this.scene.registerForPick(this.index, this.tile);
+                this.tiles.push(this.tile);
+                this.index++;
             }
         }
 
         
+    }
+
+    getTiles() {
+        return this.tiles;
     }
 
     display() {
