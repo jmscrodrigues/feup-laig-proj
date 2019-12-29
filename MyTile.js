@@ -1,7 +1,9 @@
 class MyTile extends CGFobject {
-    constructor(scene, coordX, coordZ) {
+    constructor(scene, coordX, coordZ, index) {
         super(scene);
-        
+
+
+        this.index = index;
         this.scene = scene;
         this.coordX = coordX;
         this.coordZ = coordZ;
@@ -25,6 +27,10 @@ class MyTile extends CGFobject {
 
     getCoordZ() {
         return this.coordZ;
+    }
+
+    getIndex() {
+        return this.index;
     }
 
     display() {

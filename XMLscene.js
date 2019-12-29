@@ -21,6 +21,8 @@ class XMLscene extends CGFscene {
         
         this.enableTextures(true);
 
+        this.tiles = [];
+
         //Initialize scene objects
         this.gameOrchestrator = new MyGameOrchestrator(this);
 
@@ -53,12 +55,27 @@ class XMLscene extends CGFscene {
         this.setShininess(10.0);
     }
 
+    logPicking() {
+		if (this.pickMode == false) {
+			if (this.pickResults != null && this.pickResults.length > 0) {
+				for (var i = 0; i < this.pickResults.length; i++) {
+					var obj = this.pickResults[i][0];
+					if (obj) {
+						var customId = this.pickResults[i][1];
+						console.log("Picked object: " + obj + ", with pick id " + customId);						
+					}
+				}
+				this.pickResults.splice(0, this.pickResults.length);
+			}
+		}
+	}
+
 
     display() {
 
-        this.gameOrchestrator.logPicking();
+        this.logPicking();
         this.clearPickRegistration();
-        
+
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);

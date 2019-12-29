@@ -4,7 +4,6 @@ class MyBoard extends CGFobject {
 
         this.scene = scene;
 
-        this.tiles = [];
 
         this.player1R = new MyPieceHolder(this.scene);
         this.player1Y = new MyPieceHolder(this.scene);
@@ -16,13 +15,14 @@ class MyBoard extends CGFobject {
 
         this.boardBorder = new MyBoardBorder(this.scene);
 
-        this.index = 0;
+        this.index = 1;
 
         for (var t = 0; t < 8; t++) {
             for(var j = 0; j < 8; j++) {
-                this.tile = new MyTile(this.scene, t, j);
-                this.scene.registerForPick(this.index, this.tile);
-                this.tiles.push(this.tile);
+
+                this.tile = new MyTile(this.scene, t, j, this.index);
+                this.scene.tiles.push(this.tile);
+
                 this.index++;
             }
         }
@@ -31,12 +31,14 @@ class MyBoard extends CGFobject {
     }
 
     getTiles() {
-        return this.tiles;
+        return this.scene.tiles;
     }
 
     display() {
-        for (var z = 0; z < this.tiles.length; z++) {
-            this.tiles[z].display();
+        for (var z = 0; z < this.scene.tiles.length; z++) {
+            this.scene.registerForPick(this.scene.tiles[z].getIndex(), this.tile);
+            this.scene.tiles[z].display();
+            this.scene.clearPickRegistration();
         }
         this.boardBorder.display();
 
