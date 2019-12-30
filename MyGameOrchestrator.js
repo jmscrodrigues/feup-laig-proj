@@ -15,7 +15,7 @@ class MyGameOrchestrator extends CGFobject {
 
         this.board = new MyBoard(this.scene);
         //this.theme = new MySceneGraph(this.scene);  ADD MySceneGraph with the needed changes
-        //this.prolog = new MyPrologInterface(); ADD MyPrologInteface
+        this.prolog = new MyPrologInterface(this.scene); 
         //this.animator = new MyAnimator(this.scene);
         this.gameSequence = new MyGameSequence(this.scene);
 

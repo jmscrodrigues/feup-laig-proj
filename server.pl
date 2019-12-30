@@ -103,7 +103,11 @@ print_header_line(_).
 
 % Require your Prolog Files here
 
-:- include('prolog/main.pl').
+:- include('prolog/board.pl').
+:- include('prolog/game.pl').
+:- include('prolog/menu.pl').
+
+
 
 parse_input(handshake, handshake).
 parse_input(test(C,N), Res) :- test(C,Res,N).
