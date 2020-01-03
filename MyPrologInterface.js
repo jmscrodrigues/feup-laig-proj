@@ -6,79 +6,50 @@ class MyPrologInterface {
     }
 
 
-    getPrologRequest(requestString) {
+    getPrologRequest(requestString, onSuccess) {
     var request = new XMLHttpRequest();
     request.open('GET', 'http://localhost:'+this.port+'/'+requestString, true);
 
-    request.addEventListener("load", this.parsePrologReply());
-    request.addEventListener("error", this.errorRequest());
+    request.onload = function(data) {
+        
+        let reply;
+
+        reply = data.target.response;
+
+        onSuccess(reply);
+    }
+
+    request.onerror = function(){console.log("Error!");};
 
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     request.send();
     }
 
-    parsePrologReply() {
-        if (this.status === 400) {
-        console.log("ERROR");
-        return -1;
+    getPrologRequestArray(requestString, onSuccess) {
+        var request = new XMLHttpRequest();
+        request.open('GET', 'http://localhost:'+this.port+'/'+requestString, true);
+    
+        request.onload = function(data) {
+            
+            let reply;
+    
+            reply = JSON.parse(data.target.response);
+    
+            onSuccess(reply);
+        }
+    
+        request.onerror = function(){console.log("Error!");};
+    
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        request.send();
         }
 
-        let responseArray = textStringToArray(this.responseText,true);
-        return responseArray;
 
-    }
-
-    errorRequest() {
-        console.log("ERROR");
-    }
-
-    validMoves(board) {
-        let requestString = 'valid_moves(' + board + ')';
-
-        console.log(requestString);
-
-        var result = this.getPrologRequest(requestString);
-
-        if (result == -1) {
-            return -1;
-        }
-
-        else {
-            console.log(result);
-            //DO SOMETHING WITH IT
-            return 0;
-        }
-
-    }
-
-    getBoard() {
-        let requestString = 'board()';
-
-        var result = this.getPrologRequest(requestString);
-
-        if (result == -1) {
-            return -1;
-        }
-        else {
-            console.log(result);
-            //DO SOMETHING WITH IT
-            return result;
-        }
-    }
 
     makeMove(xCoord, zCoord, Board) {
         let requestString = 'move(' + xCoord + ',' + zCoord + ',' + Board + ')';
 
-        var result = this.getPrologRequest(requestString);
-
-        if (result == -1) {
-            return -1;
-        }
-        else {
-            console.log(result);
-            //DO SOMETHING WITH IT
-            return 0;
-        }
+       
     }
 
     askPlayAIEasy(board, aiList) {

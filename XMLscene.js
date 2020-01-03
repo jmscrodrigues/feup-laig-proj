@@ -2,6 +2,11 @@
 * XMLScene
 * @constructor
 */
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 class XMLscene extends CGFscene {
     constructor() {
         super();
@@ -24,9 +29,16 @@ class XMLscene extends CGFscene {
         this.tiles = [];
         this.piecesBoard = [];
         this.pieces = [];
+        this.validMoves = [];
 
         //Initialize scene objects
         this.gameOrchestrator = new MyGameOrchestrator(this);
+
+        this.gameOrchestrator.getBoardProl();
+
+        //this.gameOrchestrator.getValidMoves(this.pieces);
+
+
 
         this.setPickEnabled(true);
 
@@ -95,7 +107,11 @@ class XMLscene extends CGFscene {
         this.lights[0].update();
         // ---- BEGIN Primitive drawing section
 
-        
+        console.log(this.pieces);
+        if(this.pieces != []) {
+            this.gameOrchestrator.movePiece(7,7,this.pieces);
+        }
+        console.log(this.validMoves);
         this.gameOrchestrator.display();
         // ---- END Primitive drawing section
     }

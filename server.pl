@@ -1,4 +1,4 @@
-:-use_module(library(sockets)).
+make:-use_module(library(sockets)).
 :-use_module(library(lists)).
 :-use_module(library(codesio)).
 
@@ -117,9 +117,9 @@ parse_input(board, Board) :- board(B), fillBoard(B,Board).
 
 parse_input(move(X,Y,Board), [BoardOut,Peca]) :- move(X,Y,Board, BoardOut, Peca).
 
-parse_input(makePlayAIEasy(Board,List,ValidMoves), BoardOut, Lfinal) :- makePlayAI('AI', Board, BoardOut, List, Lfinal, ValidMoves, 0).
+parse_input(makePlayAIEasy(Board,List,ValidMoves), [BoardOut,LFinal]) :- makePlayAI('AI', Board, BoardOut, List, Lfinal, ValidMoves, 0).
 
-parse_input(makePlayAIHard(Board,List,ValidMoves), BoardOut, Lfinal) :- makePlayAI('AI', Board, BoardOut, List, Lfinal, ValidMoves, 1).
+parse_input(makePlayAIHard(Board,List,ValidMoves), [BoardOut,LFinal]) :- makePlayAI('AI', Board, BoardOut, List, Lfinal, ValidMoves, 1).
 
 parse_input(addToList(L,Peca), Lfinal) :- addToList(L,Peca,Lfinal).
 
