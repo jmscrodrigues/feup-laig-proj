@@ -62,7 +62,7 @@ class MyPrologInterface {
         else {
             console.log(result);
             //DO SOMETHING WITH IT
-            return 0;
+            return result;
         }
     }
 
@@ -130,6 +130,11 @@ class MyPrologInterface {
             }
 
         }
+
+    }
+
+    exitProlog() {
+        let requestString = 'quit';
 
     }
     

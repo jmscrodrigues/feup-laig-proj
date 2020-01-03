@@ -21,6 +21,18 @@ class MyGameOrchestrator extends CGFobject {
 
     }
 
+    setBoardPieces() {
+        this.result = this.prolog.getBoard;
+        if (this.result == -1) {
+            console.log("error");
+            return -1;
+        }
+        else {
+            this.scene.pieces = this.result;
+            return 0;
+        }
+    }
+
     orchestrate() {
         switch(this.gameState) {
             case menu:

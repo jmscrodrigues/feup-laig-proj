@@ -22,6 +22,8 @@ class XMLscene extends CGFscene {
         this.enableTextures(true);
 
         this.tiles = [];
+        this.piecesBoard = [];
+        this.pieces = [];
 
         //Initialize scene objects
         this.gameOrchestrator = new MyGameOrchestrator(this);

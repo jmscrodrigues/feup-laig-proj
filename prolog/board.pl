@@ -101,9 +101,9 @@ fillingLoop(Max, Peca, TabIn, TabOut):-
     fillingLoop(NewMax, Peca, TabMed, TabOut).
 
 fillBoard(TabInicial, TabFinal):-
-    fillingLoop(21, 'R', TabInicial, TabMed1),
-    fillingLoop(21, 'Y', TabMed1, TabMed2),
-    fillingLoop(21, 'B', TabMed2, TabFinal),
+    fillingLoop(21, r, TabInicial, TabMed1),
+    fillingLoop(21, y, TabMed1, TabMed2),
+    fillingLoop(21, b, TabMed2, TabFinal),
     !.
 
 
@@ -214,13 +214,13 @@ rodeado(X,Y,Tab,Num):-
     N8 - 1 >= 3,
     !.
 
-verify('B',Num, NumFinal):-
+verify(b,Num, NumFinal):-
     NumFinal is Num +1.
 
-verify('R',Num, NumFinal):-
+verify(r,Num, NumFinal):-
     NumFinal is Num +1.
 
-verify('Y',Num, NumFinal):-
+verify(y,Num, NumFinal):-
     NumFinal is Num +1.
 
 
@@ -475,14 +475,14 @@ checkDraw(_Soma1,_Soma2):-
 
 
 countL1(L1,X1,Y1,Z1):-
-  count('R',L1,X1),
-  count('B',L1,Y1),
-  count('Y',L1,Z1).
+  count(r,L1,X1),
+  count(b,L1,Y1),
+  count(y,L1,Z1).
 
 countL2(L2,X2,Y2,Z2):-
-  count('R',L2,X2),
-  count('B',L2,Y2),
-  count('Y',L2,Z2).
+  count(r,L2,X2),
+  count(b,L2,Y2),
+  count(y,L2,Z2).
 
 count(_, [], 0).
 
@@ -588,9 +588,9 @@ compareRepeatedPiece(_X,_Y, _Z,Val, FinalVal):-
 
 
 countInBoardAllPieces(Board,Result1,Result2,Result3):-
-    countInBoard('R',Board,0,0,Result1),
-    countInBoard('B',Board,0,0,Result2),
-    countInBoard('Y',Board,0,0,Result3).
+    countInBoard(r,Board,0,0,Result1),
+    countInBoard(b,Board,0,0,Result2),
+    countInBoard(y,Board,0,0,Result3).
 
 
 checkBoardMostPiece(Board, X, Val,FinalVal):-
@@ -598,13 +598,13 @@ checkBoardMostPiece(Board, X, Val,FinalVal):-
     checkBoardMostPiece1(Board, X, Val,Result1,Result2,Result3,FinalVal).
 
 checkBoardMostPiece1(_Board, X, Val,Result1,Result2,Result3,FinalVal):-
-    X = 'R',
+    X = r,
     !,
     compareRepeatedPiece(Result1,Result2,Result3,Val,FinalVal).
 
 
 checkBoardMostPiece1(_Board, X, Val,Result1,Result2,Result3,FinalVal):-
-    X = 'B',
+    X = b,
     !,
     compareRepeatedPiece(Result2,Result1,Result3,Val,FinalVal).
 

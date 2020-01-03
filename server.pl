@@ -103,7 +103,6 @@ print_header_line(_).
 
 % Require your Prolog Files here
 
-:- include('prolog/board.pl').
 :- include('prolog/game.pl').
 :- include('prolog/menu.pl').
 
@@ -114,7 +113,7 @@ parse_input(test(C,N), Res) :- test(C,Res,N).
 
 parse_input(valid_moves(Board), List) :- valid_moves(Board, List).
 
-parse_input(board(), Board) :- board(B), fillBoard(B,Board).
+parse_input(board, Board) :- board(B), fillBoard(B,Board).
 
 parse_input(move(X,Y,Board), [BoardOut,Peca]) :- move(X,Y,Board, BoardOut, Peca).
 
