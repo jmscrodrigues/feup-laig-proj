@@ -1,4 +1,4 @@
-make:-use_module(library(sockets)).
+:-use_module(library(sockets)).
 :-use_module(library(lists)).
 :-use_module(library(codesio)).
 
@@ -111,17 +111,17 @@ print_header_line(_).
 parse_input(handshake, handshake).
 parse_input(test(C,N), Res) :- test(C,Res,N).
 
-parse_input(valid_moves(Board), List) :- valid_moves(Board, List).
+parse_input(valid_moves(Board), List) :- valid_moves(Board, L), list_to_json(L,List).
 
-parse_input(board, Board) :- board(B), fillBoard(B,Board).
+parse_input(board, Board) :- board(B), fillBoard(B,Brd), matrix_to_json(Brd, Board).
 
-parse_input(move(X,Y,Board), [BoardOut,Peca]) :- move(X,Y,Board, BoardOut, Peca).
+parse_input(move(X,Y,Board), [BoardOut, PecaNew]) :- move(X,Y,Board, BoardO, Peca),json(Peca,PecaNew), matrix_to_json(BoardO, BoardOut).
 
-parse_input(makePlayAIEasy(Board,List,ValidMoves), [BoardOut,LFinal]) :- makePlayAI('AI', Board, BoardOut, List, Lfinal, ValidMoves, 0).
+parse_input(makePlayAIEasy(Board,List,ValidMoves), BoardOut) :- makePlayAI('AI', Board, BoardO, List, Lf, ValidMoves, 0), matrix_to_json(BoardO, BoardOut).
 
-parse_input(makePlayAIHard(Board,List,ValidMoves), [BoardOut,LFinal]) :- makePlayAI('AI', Board, BoardOut, List, Lfinal, ValidMoves, 1).
+parse_input(makePlayAIHard(Board,List,ValidMoves), BoardOut) :- makePlayAI('AI', Board, BoardO, List, Lf, ValidMoves, 1), matrix_to_json(BoardO, BoardOut).
 
-parse_input(addToList(L,Peca), Lfinal) :- addToList(L,Peca,Lfinal).
+parse_input(addToList(L,Peca), Lfinal) :- addToList(L,Peca,Lf), list_to_json(Lf,Lfinal).
 
 % parse_input(gameOver(L1,L2))
 
@@ -136,4 +136,3 @@ parse_input(quit, goodbye).
 
 test(_,[],N) :- N =< 0.
 test(A,[A|Bs],N) :- N1 is N-1, test(A,Bs,N1).
-	

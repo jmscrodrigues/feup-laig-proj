@@ -43,9 +43,11 @@ class MyGameOrchestrator extends CGFobject {
         
         };
 
-        let requestString = 'valid_moves(' + board + ')';
+        let requestString = 'valid_moves([' + '[' +board[0] + ']'+ ',' + '[' +board[1] + ']' + ','+ '[' +board[2] + ']' + ',' + '[' +board[3] + ']' + ',' + '[' +board[4] + ']'
+        + ',' + '[' +board[5] + ']' + ',' + '[' +board[6] + ']' + ',' + '[' + board[7] + ']' + '])';
 
-        return this.prolog.getPrologRequestArray(requestString, rep.bind(this));
+
+        return this.prolog.getPrologRequest(requestString, rep.bind(this));
 
 
 
@@ -55,12 +57,19 @@ class MyGameOrchestrator extends CGFobject {
     movePiece(xCoord, zCoord, board) {
         let rep = function(data) {
 
-            //peça = data.charAt(147);
+            
+            console.log(data[0]);
 
-            this.scene.pieces = data.substring(1,146);
+            this.scene.pieces = data[0];
+
+
+            //FAZER ALGO COM A PEÇA, data[1]
+        
         };
 
-        let requestString = 'move(' + xCoord + ',' + zCoord + ',' + board + ')';
+        let requestString = 'move(' + xCoord + ',' + zCoord  + ',' + '[' + '[' + board[0] + ']' + ',' + '[' + board[1] + ']' + ',' + 
+         '[' + board[2] + ']' + ',' + '[' + board[3] + ']' + ',' + '[' + board[4] + ']' + ',' + '[' + board[5] + ']' + ',' + '[' + board[6] + ']' + ',' + 
+         '[' + board[7] + ']' +'])';
 
         return this.prolog.getPrologRequest(requestString, rep.bind(this));
     }
@@ -69,14 +78,32 @@ class MyGameOrchestrator extends CGFobject {
     askPlayAIEasy(board, aiList, validMoves) {
         let rep = function(data) {
 
-            console.log("data");
-            console.log(data);
-            console.log("..");
+            this.scene.pieces = data;
 
 
         };
 
-        let requestString = 'makePlayAIEasy(' + board + ',' + aiList + ',' + validMoves + ')';
+        var movesString = '[';
+
+        for (var i = 0; i < validMoves.length; i++) {
+            if (i == 0) {
+
+            }
+            else {movesString += ',';}
+
+            movesString += ( '[' + validMoves[i] + ']');
+        }
+
+        movesString += ']';
+
+        var aiListS = '[]';
+
+        console.log("moves\n");
+        console.log(movesString);
+
+        let requestString = 'makePlayAIEasy([' +'[' + board[0] + ']' + ',' + '[' + board[1] + ']' + ',' + 
+        '[' + board[2] + ']' + ',' + '[' + board[3] + ']' + ',' + '[' + board[4] + ']' + ',' + '[' + board[5] + ']' + ',' + '[' + board[6] + ']' + ',' + 
+        '[' + board[7] + ']' +  '],' + aiListS + ',' + movesString + ')';
 
         return this.prolog.getPrologRequest(requestString, rep.bind(this));
 
@@ -86,14 +113,31 @@ class MyGameOrchestrator extends CGFobject {
     askPlayAIHard(board, aiList, validMoves) {
         let rep = function(data) {
 
-            console.log("data");
-            console.log(data);
-            console.log("..");
+            this.scene.pieces = data;
 
 
         };
 
-        let requestString = 'makePlayAIHard(' + board + ',' + aiList + ',' + validMoves + ')';
+        var movesString = '[';
+
+        for (var i = 0; i < validMoves.length; i++) {
+            if (i == 0) {
+
+            }
+            else {movesString += ',';}
+
+            movesString += ( '[' + validMoves[i] + ']');
+        }
+
+        movesString += ']';
+
+        var aiListS = '[]';
+
+        
+
+        let requestString = 'makePlayAIHard([' +'[' + board[0] + ']' + ',' + '[' + board[1] + ']' + ',' + 
+        '[' + board[2] + ']' + ',' + '[' + board[3] + ']' + ',' + '[' + board[4] + ']' + ',' + '[' + board[5] + ']' + ',' + '[' + board[6] + ']' + ',' + 
+        '[' + board[7] + ']' +  '],' + aiListS + ',' + movesString + ')';
 
         return this.prolog.getPrologRequest(requestString, rep.bind(this));
 

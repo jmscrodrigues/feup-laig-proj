@@ -3,10 +3,6 @@
 * @constructor
 */
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 class XMLscene extends CGFscene {
     constructor() {
         super();
@@ -30,6 +26,10 @@ class XMLscene extends CGFscene {
         this.piecesBoard = [];
         this.pieces = [];
         this.validMoves = [];
+        this.listP1 = [];
+        this.listP2 = [];
+
+
 
         //Initialize scene objects
         this.gameOrchestrator = new MyGameOrchestrator(this);
@@ -109,9 +109,15 @@ class XMLscene extends CGFscene {
 
         console.log(this.pieces);
         if(this.pieces != []) {
-            this.gameOrchestrator.movePiece(7,7,this.pieces);
+           //this.gameOrchestrator.movePiece(7,7,this.pieces);
+           this.gameOrchestrator.getValidMoves(this.pieces);
         }
-        console.log(this.validMoves);
+        console.log(this.validMoves[0]);
+
+
+        if(this.validMoves != []) {
+            this.gameOrchestrator.askPlayAIEasy(this.pieces, [], this.validMoves);
+        }
         this.gameOrchestrator.display();
         // ---- END Primitive drawing section
     }
