@@ -145,6 +145,51 @@ class MyGameOrchestrator extends CGFobject {
     }
 
 
+    parseBoard(board) {
+        var index = 1;
+
+        var associationTile = null;
+        
+
+        for (var t = 0; t < board.length; t++) {
+            for (var z = 0; z < board[t].length; z++) {
+
+                for(var s = 0; s < this.scene.tiles.length; s++) {
+                    if ((this.scene.tiles[s].getCoordX == t) && (this.scene.tiles[s] == z)) {
+                        associationTile = this.scene.tiles[s];
+                        break;
+                    }
+                    
+                }
+                if (board[t][z] == "r") {
+                    var newPiece = new MyPiece(this.scene,t,z,index,null); //RED TEXT
+                    newPiece.setTile = associationTile;
+
+                }
+                else if (board[t][z] == "a") {
+                    var newPiece = new MyPiece(this.scene,t,z,index,null); //YELLOW TEXT
+                    newPiece.setTile = associationTile;
+                    
+                }
+
+                else if (board[t][z] == "b"){
+                    var newPiece = new MyPiece(this.scene,t,z,index, null); //BLUE TEXT
+                    newPiece.setTile = associationTile;
+                    
+                }
+                else {
+                    //ASTERISCO
+                }
+                index++;
+            }
+        }
+    }
+
+    drawPieces(pieces) {
+
+    }
+
+
 
     orchestrate() {
         switch(this.gameState) {

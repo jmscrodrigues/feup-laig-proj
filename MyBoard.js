@@ -36,9 +36,7 @@ class MyBoard extends CGFobject {
 
     display() {
         for (var z = 0; z < this.scene.tiles.length; z++) {
-            this.scene.registerForPick(this.scene.tiles[z].getIndex(), this.tile);
             this.scene.tiles[z].display();
-            this.scene.clearPickRegistration();
         }
         this.boardBorder.display();
 

@@ -23,6 +23,9 @@ class XMLscene extends CGFscene {
         this.enableTextures(true);
 
         this.tiles = [];
+        this.colouredPieces = [];
+
+
         this.piecesBoard = [];
         this.pieces = [];
         this.validMoves = [];
@@ -109,15 +112,11 @@ class XMLscene extends CGFscene {
 
         console.log(this.pieces);
         if(this.pieces != []) {
-           //this.gameOrchestrator.movePiece(7,7,this.pieces);
-           this.gameOrchestrator.getValidMoves(this.pieces);
+           //this.gameOrchestrator.getValidMoves(this.pieces);
+           this.gameOrchestrator.parseBoard(this.pieces);
         }
-        console.log(this.validMoves[0]);
+        
 
-
-        if(this.validMoves != []) {
-            this.gameOrchestrator.askPlayAIEasy(this.pieces, [], this.validMoves);
-        }
         this.gameOrchestrator.display();
         // ---- END Primitive drawing section
     }
