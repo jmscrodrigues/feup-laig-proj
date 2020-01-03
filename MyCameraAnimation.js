@@ -59,17 +59,24 @@ class MyCameraAnimation {
         }
     }
 
-    reSetCameta(currentCameraPosition, newCameraPosition, timeAnimation) {
+    reSetCameta(currentCameraPosition, newCameraPosition, timeAnimation, currentCameraTarget, newCameraTarget) {
         this.Xdelta = newCameraPosition[0] - currentCameraPosition[0];
         this.Ydelta = newCameraPosition[1] - currentCameraPosition[1];
         this.Zdelta = newCameraPosition[2] - currentCameraPosition[2];
 
+        this.currentCameraTarget = currentCameraTarget;
+        this.deltaTarget = vec3.fromValues(newCameraTarget[0] - currentCameraTarget[0], 
+                                            newCameraTarget[1] - currentCameraTarget[1], 
+                                            newCameraTarget[2] - currentCameraTarget[2]);
+
         this.time = -1;
         this.finalTime = -1;
         this.Tdelta = 0;
+        this.TdeltaTotal = 0;
     
         this.timeAnimation = timeAnimation;
 
         this.froze = false;
+        this.ready = false;
     }
 }
