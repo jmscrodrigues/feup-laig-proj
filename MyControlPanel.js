@@ -14,6 +14,9 @@ class MyControlPanel {
         this.pvm = new MyButton(this.scene, 'images/PvM.png');
         this.mvm = new MyButton(this.scene, 'images/MvM.png');
 
+        this.ready =  new MyButton(this.scene, 'images/ready.png');
+        this.confirm = new MyButton(this.scene, 'images/confirm.png');
+
         this.main = new MyButton(this.scene, 'images/rock.jpg')
 
         this.player1 = new MyButton(this.scene, 'images/player 1.png');
@@ -59,6 +62,12 @@ class MyControlPanel {
         
         this.scene.pushMatrix();
         this.scene.scale(3,0.20,6);
+        this.main.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-2,0,0);
+        this.scene.scale(1,0.20,2);
         this.main.display();
         this.scene.popMatrix();
 
@@ -189,6 +198,32 @@ class MyControlPanel {
 
         this.scene.popMatrix();
 
+        //ready panel
+
+        this.scene.pushMatrix();
+
+        this.scene.translate(-4,0,0);
+
+        this.scene.pushMatrix();
+        this.scene.translate(0,0,0.6);       
+        this.scene.scale(2.5,0.30,1);
+        this.ready.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0,0,-0.6);       
+        this.scene.scale(1,0.3,1);
+        this.scene.registerForPick(103, this);  
+        this.confirm.display();
+        this.scene.clearPickRegistration();   
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.scale(3,0.25,2.5);        
+        this.mainbody.display();
+        this.scene.popMatrix();
+
+        this.scene.popMatrix();
     }
 
 
