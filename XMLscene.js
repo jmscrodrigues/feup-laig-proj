@@ -54,16 +54,13 @@ class XMLscene extends CGFscene {
         this.setPickEnabled(true);
     }
     
-
-
     initLights() {
-        this.lights[0].setPosition(0, 70, 0, 1);
+        this.lights[0].setPosition(0, 1, 1, 1);
         this.lights[0].setAmbient(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setConstantAttenuation(0.05);
-        this.lights[0].disable();
-        this.lights[0].setVisible(true);
+        this.lights[0].enable();
         this.lights[0].update();
     }
     initCameras() {
@@ -124,8 +121,11 @@ class XMLscene extends CGFscene {
 
 
         for (var s = 0; s < this.piecesBoard.length; s++) {
-
+            this.pushMatrix();
+            //this.currentScene.piecesPosition();
             this.piecesBoard[s].display();
+            this.popMatrix();
+
         }
 
         this.currentScene.display();

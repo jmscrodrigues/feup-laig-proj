@@ -275,7 +275,7 @@ class MyScene1 {
     }
 
     boardPosition() {
-        this.scene.translate(-0.15,1,0.9);
+        this.scene.translate(-0.15,1.01,0.9);
         this.scene.scale(0.05,0.05,0.05);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
     }
@@ -286,7 +286,11 @@ class MyScene1 {
         this.scene.rotate(Math.PI/2, 0, 1, 0);
     }
 
-    //Tem as coodenadas da camera e o ponto para onde esta a ver
+    piecesPosition() {
+        this.scene.translate(0,1,0);
+        this.scene.scale(0.5,0.5,0.5);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+    } 
 
     controlPanelPosition() {
         this.scene.translate(0.85,0.65,0);
@@ -294,6 +298,8 @@ class MyScene1 {
         this.scene.rotate(-Math.PI/2, 1, 0, 0);
         this.scene.rotate(-Math.PI/2, 0, 0, 1);
     }
+    
+    //Tem as coodenadas da camera e o ponto para onde esta a ver
 
     cameraSettingsCoords() {
 
