@@ -265,4 +265,66 @@ class MyScene1 {
         this.scene.popMatrix();
 
     }
+
+    //Tem as transformacoes necessarias para por os elementos no local certo
+
+    timerPosition() {
+        this.scene.translate(0,1,0.25);
+        this.scene.scale(0.1,0.1,0.1);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+    }
+
+    boardPosition() {
+        this.scene.translate(-0.15,1,0.9);
+        this.scene.scale(0.05,0.05,0.05);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+    }
+
+    announcementsPanelPosition() {
+        this.scene.translate(0,1,1.3);
+        this.scene.scale(0.1,0.08,0.1);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+    }
+
+    //Tem as coodenadas da camera e o ponto para onde esta a ver
+
+    controlPanelPosition() {
+        this.scene.translate(0.85,0.65,0);
+        this.scene.scale(0.1,0.08,0.1);
+        this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        this.scene.rotate(-Math.PI/2, 0, 0, 1);
+    }
+
+    cameraSettingsCoords() {
+
+    }
+
+    cameraSttingsViewPoint() {
+
+    }
+
+    cameraPlayer1Coords() {
+
+    }
+
+    cameraPlayer1ViewPoint() {
+
+    }
+
+    cameraPlayer2Coords() {
+
+    }
+
+    cameraPlayer2ViewPoint() {
+
+    }
+
+    cameraSpectetorCoords() {
+
+    }
+
+    cameraSpetetorViewPoint() {
+
+    }
+
 }
