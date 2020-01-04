@@ -37,6 +37,7 @@ class XMLscene extends CGFscene {
 
         this.lastPicked = null;
         this.gameDifficulty = "normal";
+        this.gameMode = "pvp";
 
 
         //Initialize scene objects
@@ -92,15 +93,24 @@ class XMLscene extends CGFscene {
 				for (var i = 0; i < this.pickResults.length; i++) {
 					var obj = this.pickResults[i][0];
 					if (obj) {
-						var customId = this.pickResults[i][1];
-                        console.log("Picked object: " + obj + ", with pick id " + customId + "with coords" + this.pickResults[i][0].getCoordX() + "," + this.pickResults[i][0].getCoordZ());	
+                        var customId = this.pickResults[i][1];
+                        if ((customId > 0) && (customId < 65)) {
+                            console.log("Picked object: " + obj + ", with pick id " + customId + "with coords" + this.pickResults[i][0].getCoordX() + "," + this.pickResults[i][0].getCoordZ());	
+
+                        }
+                        else {
+                            console.log("Picked object: " + obj + ", with pick id " + customId);	
+                        }
                         if(this.lastPicked != customId) {
                             this.lastPicked = customId;
                         }
                         else if (this.lastPicked == customId && (customId > 0) && (customId < 65)){
                             this.gameOrchestrator.movePiece(this.pickResults[i][0].getCoordX(), this.pickResults[i][0].getCoordZ(),this.pieces);
                             this.lastPicked = null;
-                        }					
+                        }
+                        else if (this.lastPicked == customId && (customId > 99)) {
+                            this.gameOrchestrator.parseGameInputs(customId);
+                        }
 					}
 				}
 				this.pickResults.splice(0, this.pickResults.length);

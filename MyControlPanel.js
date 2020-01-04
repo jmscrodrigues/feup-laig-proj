@@ -76,20 +76,26 @@ class MyControlPanel {
 
         this.scene.pushMatrix();
         this.scene.translate(1.5,0,-0.60); 
-        this.scene.scale(1,0.30,1);    
+        this.scene.scale(1,0.30,1); 
+        this.scene.registerForPick(100, this);
         this.easy.display();
+        this.scene.clearPickRegistration();   
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0,0,-0.6);       
         this.scene.scale(1.5,0.30,1);
+        this.scene.registerForPick(100, this);
         this.medium.display();
+        this.scene.clearPickRegistration();   
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1.5,0,-0.60); 
-        this.scene.scale(1,0.30,1);    
+        this.scene.scale(1,0.30,1); 
+        this.scene.registerForPick(101, this);   
         this.hard.display();
+        this.scene.clearPickRegistration();   
         this.scene.popMatrix();
 
        
@@ -111,20 +117,26 @@ class MyControlPanel {
 
         this.scene.pushMatrix();
         this.scene.translate(1.2,0,-0.60); 
-        this.scene.scale(1,0.30,1);    
+        this.scene.scale(1,0.30,1);  
+        this.scene.registerForPick(102, this);  
         this.pvp.display();
+        this.scene.clearPickRegistration();   
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0,0,-0.6);       
         this.scene.scale(1,0.3,1);
+        this.scene.registerForPick(103, this);  
         this.pvm.display();
+        this.scene.clearPickRegistration();   
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1.2,0,-0.60); 
-        this.scene.scale(1,0.30,1);    
+        this.scene.scale(1,0.30,1); 
+        this.scene.registerForPick(104, this);     
         this.mvm.display();
+        this.scene.clearPickRegistration();   
         this.scene.popMatrix();
 
         this.scene.pushMatrix();

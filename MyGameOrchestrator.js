@@ -308,6 +308,10 @@ class MyGameOrchestrator extends CGFobject {
         }
     }
 
+    parseGameInputs(id) {
+        
+    }
+
 
 
     orchestrate() {
