@@ -117,9 +117,9 @@ parse_input(board, Board) :- board(B), fillBoard(B,Brd), matrix_to_json(Brd, Boa
 
 parse_input(move(X,Y,Board), [BoardOut, PecaNew]) :- move(X,Y,Board, BoardO, Peca),json(Peca,PecaNew), matrix_to_json(BoardO, BoardOut).
 
-parse_input(makePlayAIEasy(Board,List,ValidMoves), [BoardOut,Lfinal, X, Y]) :- choose_move(ValidMoves, X, Y), move(X,Y,Board,BoardO,Peca), addToList(List,Peca,Lf), list_to_json(Lf, Lfinal) ,matrix_to_json(BoardO, BoardOut).
+parse_input(makePlayAIEasy(Board,List,ValidMoves), [BoardOut,Lfinal, X, Y, PecaNew]) :- choose_move(ValidMoves, X, Y), move(X,Y,Board,BoardO,Peca), addToList(List,Peca,Lf), json(Peca,PecaNew), list_to_json(Lf, Lfinal) ,matrix_to_json(BoardO, BoardOut).
 
-parse_input(makePlayAIHard(Board,List,ValidMoves), [BoardOut,Lfinal, X, Y]) :- choose_moveHard(ValidMoves, List, X, Y, Board), move(X,Y,Board,BoardO,Peca), addToList(List,Peca,Lf), list_to_json(Lf, Lfinal) ,matrix_to_json(BoardO, BoardOut).
+parse_input(makePlayAIHard(Board,List,ValidMoves), [BoardOut,Lfinal, X, Y, PecaNew]) :- choose_moveHard(ValidMoves, List, X, Y, Board), move(X,Y,Board,BoardO,Peca), addToList(List,Peca,Lf), json(Peca,PecaNew), list_to_json(Lf, Lfinal) ,matrix_to_json(BoardO, BoardOut).
 
 parse_input(addToList(L,Peca), Lfinal) :- addToList(L,Peca,Lf), list_to_json(Lf,Lfinal).
 

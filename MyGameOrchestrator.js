@@ -64,6 +64,11 @@ class MyGameOrchestrator extends CGFobject {
 
 
             //FAZER ALGO COM A PEÇA, data[1]
+
+            this.gameSequence.addMove(new MyMove(xCoord, zCoord, data[1])); //ADICIONA A SEQUENCIA DO JOGO
+
+            //FAZER A ANIMAÇAO DA PEÇA PARA O RESPETIVO CONTAINER
+            //ADICIONAR A LISTA DO PLAYER HUMANO EM QUESTAO (talvez passar como parametro a esta função)
         
         };
 
@@ -85,6 +90,10 @@ class MyGameOrchestrator extends CGFobject {
             //X = data[2];
 
             //Y = data[3];
+
+
+            this.gameSequence.addMove(new MyMove(data[2], data[3], data[4])); //ADICIONA A SEQUENCIA DO JOGO
+
 
             //ANIMACAO DA PEÇA COM ESSAS COORDENADAS PARA O CONTAINER ESPECIFICO
             //REMOVER O APONTADOR PARA O TILE DA PEÇA
@@ -135,7 +144,12 @@ class MyGameOrchestrator extends CGFobject {
 
             //X = data[2];
 
-            //Y = data[3];
+            //Z = data[3];
+
+            //Peca = data[4]
+
+            this.gameSequence.addMove(new MyMove(data[2], data[3], data[4])); //ADICIONA A SEQUENCIA DO JOGO
+
 
             //ANIMACAO DA PEÇA COM ESSAS COORDENADAS PARA O CONTAINER ESPECIFICO
             //REMOVER O APONTADOR PARA O TILE DA PEÇA
@@ -257,6 +271,19 @@ class MyGameOrchestrator extends CGFobject {
         setTimeout( () => this.askPlayAIHard(this.scene.pieces,this.scene.listP2,this.scene.validMoves),2000);
 
 
+    }
+
+
+    undoSequenceAMove() {
+        var move = this.gameSequence.getLastPlay();
+
+        if (move == -1) {
+            return -1;
+        }
+        else {
+            //FAZER A ANIMAÇÃO
+            this.gameSequence.undoMove();
+        }
     }
 
 

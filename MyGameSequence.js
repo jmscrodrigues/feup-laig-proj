@@ -13,4 +13,14 @@ class MyGameSequence extends CGFobject{
     addMove(move) {
         this.sequence.push(move);
     }
+
+    getLastPlay() {
+        if (this.sequence.length == 0) {
+            return -1;
+        }
+
+        else {
+            return this.sequence[this.sequence.length - 1];
+        }
+    }
 }
