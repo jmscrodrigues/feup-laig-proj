@@ -78,9 +78,17 @@ class MyGameOrchestrator extends CGFobject {
     askPlayAIEasy(board, aiList, validMoves) {
         let rep = function(data) {
 
-            this.scene.pieces = data;
+            this.scene.pieces = data[0];
 
+            this.scene.listP2 = data[1];
 
+            //X = data[2];
+
+            //Y = data[3];
+
+            //ANIMACAO DA PEÇA COM ESSAS COORDENADAS PARA O CONTAINER ESPECIFICO
+            //REMOVER O APONTADOR PARA O TILE DA PEÇA
+            //LISTA DO BOT JA ATUALIZADA (DATA[1])
         };
 
         var movesString = '[';
@@ -96,10 +104,18 @@ class MyGameOrchestrator extends CGFobject {
 
         movesString += ']';
 
-        var aiListS = '[]';
+        var aiListS = '[';
 
-        console.log("moves\n");
-        console.log(movesString);
+        for (var l = 0; l < aiList.length; l++) {
+            if (l == 0) {
+
+            }
+            else {aiListS += ',';}
+
+            aiListS += aiList[l];
+        }
+
+        aiListS += ']'
 
         let requestString = 'makePlayAIEasy([' +'[' + board[0] + ']' + ',' + '[' + board[1] + ']' + ',' + 
         '[' + board[2] + ']' + ',' + '[' + board[3] + ']' + ',' + '[' + board[4] + ']' + ',' + '[' + board[5] + ']' + ',' + '[' + board[6] + ']' + ',' + 
@@ -113,7 +129,18 @@ class MyGameOrchestrator extends CGFobject {
     askPlayAIHard(board, aiList, validMoves) {
         let rep = function(data) {
 
-            this.scene.pieces = data;
+            this.scene.pieces = data[0];
+
+            this.scene.listP2 = data[1];
+
+            //X = data[2];
+
+            //Y = data[3];
+
+            //ANIMACAO DA PEÇA COM ESSAS COORDENADAS PARA O CONTAINER ESPECIFICO
+            //REMOVER O APONTADOR PARA O TILE DA PEÇA
+            //LISTA DO BOT JA ATUALIZADA (DATA[1])
+
 
 
         };
@@ -131,7 +158,18 @@ class MyGameOrchestrator extends CGFobject {
 
         movesString += ']';
 
-        var aiListS = '[]';
+        var aiListS = '[';
+
+        for (var l = 0; l < aiList.length; l++) {
+            if (l == 0) {
+
+            }
+            else {aiListS += ',';}
+
+            aiListS += aiList[l];
+        }
+
+        aiListS += ']'
 
         
 
@@ -190,7 +228,34 @@ class MyGameOrchestrator extends CGFobject {
 
     }
 
-    drawPieces(pieces) {
+
+
+
+    initiateGame() {
+        this.getBoardProl();
+
+        setTimeout( () => this.getValidMoves(this.scene.pieces), 3000);
+
+        setTimeout( () => this.parseBoard(this.scene.pieces), 4000);
+
+    }
+
+
+
+    easyBotPlay() {
+        setTimeout( () => this.getValidMoves(this.scene.pieces),3000);
+
+        setTimeout( () => this.askPlayAIEasy(this.scene.pieces,this.scene.listP2,this.scene.validMoves),5000);
+
+        
+
+    }
+
+    hardBotPlay() {
+        this.getValidMoves(this.scene.pieces);
+
+        setTimeout( () => this.askPlayAIHard(this.scene.pieces,this.scene.listP2,this.scene.validMoves),2000);
+
 
     }
 

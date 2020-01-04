@@ -37,13 +37,9 @@ class XMLscene extends CGFscene {
         //Initialize scene objects
         this.gameOrchestrator = new MyGameOrchestrator(this);
 
-        this.gameOrchestrator.getBoardProl();
+        this.gameOrchestrator.initiateGame();
 
-        setInterval(function(){
-            this.gameOrchestrator.getValidMoves(this.pieces);}, 6000);
-
-        setInterval(this.gameOrchestrator.parseBoard(this.pieces), 6000);
-
+        this.gameOrchestrator.easyBotPlay();
 
 
         this.setPickEnabled(true);
@@ -114,19 +110,6 @@ class XMLscene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         
-
-        console.log("board das pieces");
-        console.log(this.piecesBoard);
-
-        console.log("\n");
-
-        console.log("pieces");
-        console.log(this.pieces);
-
-        console.log("\n");
-
-        console.log("valid");
-        console.log(this.validMoves);
 
 
 
