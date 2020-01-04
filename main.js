@@ -16,7 +16,7 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MyInterface.js', 'MyTile.js', 'M
 'MyGameSequence.js','MyPieceHolder.js','MyTriangularPyramid.js','MyBoardBorder.js','MyCylinder.js',
 'MyPrologInterface.js','MyPiece.js','MyHexagonalPrism.js','MyMove.js','MyScene1.js','MyBoatRope.js',
 'MyTriangle.js','MySphere.js','MyButton.js','MyTimer.js','MyHourglass.js','MyTorus.js',
-'MyControlPanel.js','MyAnnouncementsPanel.js',
+'MyControlPanel.js','MyAnnouncementsPanel.js','MyCameraAnimation.js',
 
 main=function()
 {

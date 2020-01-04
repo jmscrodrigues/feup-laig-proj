@@ -6,6 +6,7 @@
 class XMLscene extends CGFscene {
     constructor() {
         super();
+
     }
     init(application) {
         super.init(application);
@@ -47,6 +48,10 @@ class XMLscene extends CGFscene {
         this.controlPanel =  new MyControlPanel(this);
         this.announcementsPanel = new MyAnnouncementsPanel(this);
 
+        this.ActiveCamera = 0;
+        this.cameras = {'Settings': 0, 'Player1': 1, 'Player2': 2};
+        this.cameraAnimation = new MyCameraAnimation(this.from, this.from, 0.0001, this.target, this.target);
+
         this.gameOrchestrator = new MyGameOrchestrator(this);
 
 
@@ -69,7 +74,9 @@ class XMLscene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(20, 20, 20), vec3.fromValues(0, 0, 0));
+        this.from = vec3.fromValues(5, 2, 0);
+        this.target = vec3.fromValues(0, 0, 0)
+        this.camera = new CGFcamera(0.4, 0.1, 500, this.from, this.target);
     }
 
     setDefaultAppearance() {
@@ -99,11 +106,18 @@ class XMLscene extends CGFscene {
 				this.pickResults.splice(0, this.pickResults.length);
 			}
 		}
-	}
+    }
+
+    changeActiveCamera() {
+        this.cameraAnimation.reSetCameta(this.from, this.currentScene.cameraCoords()[this.ActiveCamera], 5, this.target, this.currentScene.cameraViewPoints()[this.ActiveCamera]);
+        this.from = this.currentScene.cameraCoords()[this.ActiveCamera];
+        this.target = this.currentScene.cameraViewPoints()[this.ActiveCamera];
+    }
 
     update(t) {
         this.scene1.update(t);
         this.timer.update(t);
+        this.cameraAnimation.update(t);
     }
 
     display() {
@@ -129,7 +143,7 @@ class XMLscene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         
-
+        this.cameraAnimation.display(this.camera);
 
 
         for (var s = 0; s < this.piecesBoard.length; s++) {

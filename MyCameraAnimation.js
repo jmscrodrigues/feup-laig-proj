@@ -4,6 +4,7 @@ class MyCameraAnimation {
         this.Ydelta = newCameraPosition[1] - currentCameraPosition[1];
         this.Zdelta = newCameraPosition[2] - currentCameraPosition[2];
 
+        this.currentCameraPosition = currentCameraPosition;
         this.currentCameraTarget = currentCameraTarget;
         this.deltaTarget = vec3.fromValues(newCameraTarget[0] - currentCameraTarget[0], 
                                             newCameraTarget[1] - currentCameraTarget[1], 
@@ -45,7 +46,9 @@ class MyCameraAnimation {
     display (camera) {
         if(this.ready) {
         
-        var vecTranslate = vec3.fromValues(this.Tdelta*this.Xdelta,this.Tdelta*this.Ydelta,this.Tdelta*this.Zdelta);
+        var vecTranslate = vec3.fromValues( this.currentCameraPosition[0] + this.TdeltaTotal*this.Xdelta,
+                                            this.currentCameraPosition[1] + this.TdeltaTotal*this.Ydelta,
+                                            this.currentCameraPosition[2] + this.TdeltaTotal*this.Zdelta);
         
         var vecTarget = vec3.fromValues(this.currentCameraTarget[0] + this.deltaTarget[0]*this.TdeltaTotal,
                                         this.currentCameraTarget[1] + this.deltaTarget[1]*this.TdeltaTotal, 
@@ -53,7 +56,7 @@ class MyCameraAnimation {
 
         camera.setTarget(vecTarget);
 
-        camera.translate(vecTranslate);
+        camera.setPosition(vecTranslate);
 
         this.ready = false;
         }
@@ -64,6 +67,7 @@ class MyCameraAnimation {
         this.Ydelta = newCameraPosition[1] - currentCameraPosition[1];
         this.Zdelta = newCameraPosition[2] - currentCameraPosition[2];
 
+        this.currentCameraPosition = currentCameraPosition;
         this.currentCameraTarget = currentCameraTarget;
         this.deltaTarget = vec3.fromValues(newCameraTarget[0] - currentCameraTarget[0], 
                                             newCameraTarget[1] - currentCameraTarget[1], 
