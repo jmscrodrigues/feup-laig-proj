@@ -36,7 +36,7 @@ class XMLscene extends CGFscene {
         this.counter = 0;
 
         this.lastPicked = null;
-        this.gameDifficulty = "normal";
+        this.gameDifficulty = "medium";
         this.gameMode = "pvp";
 
 
@@ -58,9 +58,7 @@ class XMLscene extends CGFscene {
 
         this.gameOrchestrator.orchestrate();
 
-
-        setTimeout( () => this.gameOrchestrator.setGameState(gameStates.gamePlayerPlayer),3000);
-
+        this.gameOrchestrator.easyBotPlay();
 
         this.setPickEnabled(true);
     }
@@ -108,8 +106,12 @@ class XMLscene extends CGFscene {
                             this.gameOrchestrator.movePiece(this.pickResults[i][0].getCoordX(), this.pickResults[i][0].getCoordZ(),this.pieces);
                             this.lastPicked = null;
                         }
-                        else if (this.lastPicked == customId && (customId > 99)) {
+                        else if (this.lastPicked == customId && (customId > 99) && (customId < 105)) {
                             this.gameOrchestrator.parseGameInputs(customId);
+                        }
+
+                        else if(this.lastPicked == customId && (customId == 200)) {
+                            this.gameOrchestrator.startGame();
                         }
 					}
 				}

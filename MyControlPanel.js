@@ -213,7 +213,7 @@ class MyControlPanel {
         this.scene.pushMatrix();
         this.scene.translate(0,0,-0.6);       
         this.scene.scale(1,0.3,1);
-        this.scene.registerForPick(103, this);  
+        this.scene.registerForPick(200, this);  
         this.confirm.display();
         this.scene.clearPickRegistration();   
         this.scene.popMatrix();

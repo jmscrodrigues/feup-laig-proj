@@ -27,6 +27,8 @@ class MyGameOrchestrator extends CGFobject {
 
     }
 
+    
+    /* Function to set the actual gameState */
 
     setGameState(gameState) {
         this.gameState = gameState;
@@ -34,6 +36,7 @@ class MyGameOrchestrator extends CGFobject {
     }
 
 
+    /* Prolog connection to get the initial board */
 
     getBoardProl() {
         let rep = function(data) {
@@ -47,6 +50,8 @@ class MyGameOrchestrator extends CGFobject {
 
     }
 
+
+    /* Prolog connection to get the valid moves from the current board */
 
     getValidMoves(board) {
         let rep = function(data) {
@@ -63,6 +68,9 @@ class MyGameOrchestrator extends CGFobject {
 
 
     }
+
+
+    /* Prolog connection to move a piece from the board */
 
 
     movePiece(xCoord, zCoord, board) {
@@ -91,6 +99,10 @@ class MyGameOrchestrator extends CGFobject {
 
         return this.prolog.getPrologRequest(requestString, rep.bind(this));
     }
+
+
+
+    /* Prolog connection to get a play from the easy difficulty bot */
 
 
     askPlayAIEasy(board, aiList, validMoves) {
@@ -147,6 +159,9 @@ class MyGameOrchestrator extends CGFobject {
 
 
     }
+
+
+    /* Prolog connection to get a play from the hard difficulty bot */
 
     askPlayAIHard(board, aiList, validMoves) {
         let rep = function(data) {
@@ -210,6 +225,8 @@ class MyGameOrchestrator extends CGFobject {
     }
 
 
+    /* Function to get all the pieces in the board */
+
     parseBoard(board) {
         var index = 1;
 
@@ -258,6 +275,9 @@ class MyGameOrchestrator extends CGFobject {
 
 
 
+    /* Function to get the initial board */
+
+
     initiateGame() {
         this.getBoardProl();
 
@@ -269,24 +289,29 @@ class MyGameOrchestrator extends CGFobject {
 
 
 
+    /* Function to get a play from bot in easy difficulty */
+
     easyBotPlay() {
-        setTimeout( () => this.getValidMoves(this.scene.pieces),3000);
+        setTimeout( () => this.getValidMoves(this.scene.pieces),2000);
 
         setTimeout( () => this.askPlayAIEasy(this.scene.pieces,this.scene.listP2,this.scene.validMoves),5000);
 
-        
-
+        setTimeout(() => console.log(this.scene.listP2), 7000);
     }
+
+
+    /* Function to get a play from bot in hard difficulty */
 
     hardBotPlay() {
-        this.getValidMoves(this.scene.pieces);
+        setTimeout( () => this.getValidMoves(this.scene.pieces),2000);
 
-        setTimeout( () => this.askPlayAIHard(this.scene.pieces,this.scene.listP2,this.scene.validMoves),2000);
+        setTimeout( () => this.askPlayAIHard(this.scene.pieces,this.scene.listP2,this.scene.validMoves),5000);
 
-
+        setTimeout(() => console.log(this.scene.listP2), 7000);
     }
 
 
+    /* Function to undo move*/
     undoSequenceMove() {
         var move = this.gameSequence.getLastPlay();
 
@@ -300,6 +325,8 @@ class MyGameOrchestrator extends CGFobject {
     }
 
 
+    /*Function to show the gameSequence */
+
     gameSequence() {
         var sequenceVector = this.gameSequence.getSequence();
         for(var m = 0; m < sequenceVector.length; m++) {
@@ -308,8 +335,79 @@ class MyGameOrchestrator extends CGFobject {
         }
     }
 
+
+    /*Function to parse controlPanel inputs*/
+
     parseGameInputs(id) {
-        
+        if (id == 100) {
+            this.scene.gameDifficulty = "medium";
+        }
+
+        else if(id == 101) {
+            this.scene.gameDifficulty = "hard";
+        }
+
+        else if(id == 102) {
+            this.scene.gameMode = "pvp";
+
+        }
+
+        else if(id == 103) {
+            this.scene.gameMode = "pvm";
+
+        }
+
+        else if(id == 104) {
+            this.scene.gameMode = "mvm";
+
+        }
+    }
+
+
+
+    /*Function to parse the definitions to start the game*/
+
+    startGame() {
+
+        if (this.scene.gameMode == "pvm") {
+            if (this.scene.gameDifficulty == "medium") {
+                this.gameState = gameStates.gamePlayerBotEasy;
+            }
+            else if (this.scene.gameDifficulty == "hard") {
+                this.gameState = gameStates.gamePlayerBotHard;
+            }
+        }
+
+        else if(this.scene.gameMode == "pvp") {
+            this.gameState = gameStates.gamePlayerPlayer;
+        }
+
+        else if(this.scene.gameMode == "mvm") {
+            this.gameState = gameStates.gamePlayerBotBot;
+        }
+
+        this.orchestrate();
+    }
+
+
+    countPoints(list) {
+        var a = 0;
+        var b = 0;
+        var r = 0;
+
+        for (var t = 0; t < list.length; t++) {
+            if (list[t] == "a") {
+                a++;
+            }
+            else if(list[t] == "b") {
+                b++;
+            }
+            else if(list[t] == "r") {
+                r++;
+            } 
+        }
+
+        return (Math.floor(a/5) + Math.floor(b/5) + Math.floor(r/5));
     }
 
 
@@ -327,33 +425,34 @@ class MyGameOrchestrator extends CGFobject {
             case gameStates.loadScene:
                 console.log("what?");
                 //IR BUSCAR A SCENE
+
                 break;
 
-            
-
             case gameStates.menu:
-                console.log("AW HE\n");
-
                 break;
 
             case gameStates.gamePlayerPlayer:
-                console.log("Na na");
                 // INICIO DO LOOP JOGADOR JOGADOR
+                console.log("PP");
+
                 break;
 
             case gameStates.gamePlayerBotEasy:
                 // INICIO DO LOOP JOGADOR BOT EASY
+                console.log("EASY PB");
 
                 break;
 
             case gameStates.gamePlayerBotHard:
                 // INICIO DO LOOP JOGADOR BOT HARD
-
+                console.log("HARD PB");
 
                 break;
 
             case gameStates.gamePlayerBotBot:
                 // INICIO DO LOOP JOGADOR BOT BOT
+
+                console.log("BB");
 
                 break;
 
