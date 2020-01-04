@@ -1,15 +1,20 @@
+const gameStates = Object.freeze({
+    menu : "Menu",
+    loadGame : "LoadGame",
+    loadScene : "LoadScene",
+    gamePlayerPlayer : "GamePlayerPlayer",
+    gamePlayerBotEasy : "GamePlayerBotEasy",
+    gamePlayerBotHard : "GamePlayerBotHard",
+    gameBotBot : "GameBotBot",
+    gameOver: "GameOver"
+});
+
 class MyGameOrchestrator extends CGFobject {
     constructor(scene) {
         super(scene);
-        const gameStates = Object.freeze({
-            menu : "Menu",
-            loadGame : "LoadGame",
-            gameMove : "GameMove",
-            animation : "Animation",
-            gameOver: "GameOver"
-        });
+        
 
-        this.gameState = gameStates.menu;
+        this.gameState = gameStates.loadGame;
 
         this.scene = scene;
 
@@ -20,6 +25,12 @@ class MyGameOrchestrator extends CGFobject {
         //this.animator = new MyAnimator(this.scene);
         this.gameSequence = new MyGameSequence(this.scene);
 
+    }
+
+
+    setGameState(gameState) {
+        this.gameState = gameState;
+        this.orchestrate();
     }
 
 
@@ -248,9 +259,9 @@ class MyGameOrchestrator extends CGFobject {
     initiateGame() {
         this.getBoardProl();
 
-        setTimeout( () => this.getValidMoves(this.scene.pieces), 3000);
+        setTimeout( () => this.getValidMoves(this.scene.pieces), 2500);
 
-        setTimeout( () => this.parseBoard(this.scene.pieces), 4000);
+        setTimeout( () => this.parseBoard(this.scene.pieces), 3000);
 
     }
 
@@ -274,15 +285,24 @@ class MyGameOrchestrator extends CGFobject {
     }
 
 
-    undoSequenceAMove() {
+    undoSequenceMove() {
         var move = this.gameSequence.getLastPlay();
 
         if (move == -1) {
             return -1;
         }
         else {
-            //FAZER A ANIMAÇÃO
+            //FAZER A ANIMAÇÃO INVERSA DO MOVE
             this.gameSequence.undoMove();
+        }
+    }
+
+
+    gameSequence() {
+        var sequenceVector = this.gameSequence.getSequence();
+        for(var m = 0; m < sequenceVector.length; m++) {
+            //DISPLAY DA ANIMAÇÃO INVERSA DO MOVE DE sequenceVector[m];
+            console.log("1");
         }
     }
 
@@ -290,16 +310,50 @@ class MyGameOrchestrator extends CGFobject {
 
     orchestrate() {
         switch(this.gameState) {
-            case menu:
+
+            case gameStates.loadGame:
+                this.initiateGame();
+                this.gameState = gameStates.menu;
+                console.log("YO");
+                this.orchestrate();
                 break;
-            case loadGame:
+
+            case gameStates.loadScene:
+                console.log("what?");
+                //IR BUSCAR A SCENE
                 break;
-            case gameMove:
+
+            
+
+            case gameStates.menu:
+                console.log("AW HE\n");
+
                 break;
-            case animation:
+
+            case gameStates.gamePlayerPlayer:
+                console.log("Na na");
+                // INICIO DO LOOP JOGADOR JOGADOR
                 break;
-            case gameOver:
+
+            case gameStates.gamePlayerBotEasy:
+                // INICIO DO LOOP JOGADOR BOT EASY
+
                 break;
+
+            case gameStates.gamePlayerBotHard:
+                // INICIO DO LOOP JOGADOR BOT HARD
+
+
+                break;
+
+            case gameStates.gamePlayerBotBot:
+                // INICIO DO LOOP JOGADOR BOT BOT
+
+                break;
+
+            case gameStates.gameOver:
+                break;
+
             default:
                 break;
         }
@@ -309,6 +363,12 @@ class MyGameOrchestrator extends CGFobject {
     update(time) {
         //this.animator.update(time);
     }
+
+
+
+
+
+
 
 
     display() {

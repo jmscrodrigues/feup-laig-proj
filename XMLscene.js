@@ -46,9 +46,11 @@ class XMLscene extends CGFscene {
 
         this.gameOrchestrator = new MyGameOrchestrator(this);
 
-        this.gameOrchestrator.initiateGame();
 
-        this.gameOrchestrator.easyBotPlay();
+        this.gameOrchestrator.orchestrate();
+
+
+        setTimeout( () => this.gameOrchestrator.setGameState(gameStates.gamePlayerPlayer),3000);
 
 
         this.setPickEnabled(true);
