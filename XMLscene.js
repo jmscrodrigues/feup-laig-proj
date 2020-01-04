@@ -34,6 +34,9 @@ class XMLscene extends CGFscene {
         this.listP2 = [];
         this.counter = 0;
 
+        this.lastPicked = null;
+        this.gameDifficulty = "normal";
+
 
         //Initialize scene objects
         this.scene1 = new MyScene1(this);
@@ -83,7 +86,14 @@ class XMLscene extends CGFscene {
 					var obj = this.pickResults[i][0];
 					if (obj) {
 						var customId = this.pickResults[i][1];
-						console.log("Picked object: " + obj + ", with pick id " + customId);						
+                        console.log("Picked object: " + obj + ", with pick id " + customId + "with coords" + this.pickResults[i][0].getCoordX() + "," + this.pickResults[i][0].getCoordZ());	
+                        if(this.lastPicked != customId) {
+                            this.lastPicked = customId;
+                        }
+                        else if (this.lastPicked == customId && (customId > 0) && (customId < 65)){
+                            this.gameOrchestrator.movePiece(this.pickResults[i][0].getCoordX(), this.pickResults[i][0].getCoordZ(),this.pieces);
+                            this.lastPicked = null;
+                        }					
 					}
 				}
 				this.pickResults.splice(0, this.pickResults.length);

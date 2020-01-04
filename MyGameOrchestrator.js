@@ -80,6 +80,8 @@ class MyGameOrchestrator extends CGFobject {
 
             //FAZER A ANIMAÇAO DA PEÇA PARA O RESPETIVO CONTAINER
             //ADICIONAR A LISTA DO PLAYER HUMANO EM QUESTAO (talvez passar como parametro a esta função)
+
+            console.log("FIZ MOVIMENTO!");
         
         };
 
@@ -352,6 +354,17 @@ class MyGameOrchestrator extends CGFobject {
                 break;
 
             case gameStates.gameOver:
+                var pointsP1 = this.countPoints(this.scene.listP1);
+                var pointsP2 = this.countPoints(this.scene.listP2);
+                if (pointsP1 > pointsP2) {
+                    console.log("Player 1 WINS!");
+                }
+                else if (pointsP2 > pointsP1) {
+                    console.log("Player 2 WINS!");
+                }
+                else {
+                    console.log("It's a TIE!");
+                }
                 break;
 
             default:
