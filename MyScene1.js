@@ -301,36 +301,17 @@ class MyScene1 {
     
     //Tem as coodenadas da camera e o ponto para onde esta a ver
 
-    cameraSettingsCoords() {
-
+    cameraCoords() {
+        let coords0 = vec3.fromValues(5, 2, 0);
+        let coords1 = vec3.fromValues(3, 3, 1);
+        let coords2 = vec3.fromValues(-3,3,1);
+        return new Array(coords0,  coords1, coords2);
     }
 
-    cameraSttingsViewPoint() {
-
+    cameraViewPoints() {
+        let VP0 = vec3.fromValues(0, 0, 0);
+        let VP1 = vec3.fromValues(0, 1, 1);
+        let VP2 = vec3.fromValues(0,1,1);
+        return new Array(VP0,VP1,VP2);
     }
-
-    cameraPlayer1Coords() {
-
-    }
-
-    cameraPlayer1ViewPoint() {
-
-    }
-
-    cameraPlayer2Coords() {
-
-    }
-
-    cameraPlayer2ViewPoint() {
-
-    }
-
-    cameraSpectetorCoords() {
-
-    }
-
-    cameraSpetetorViewPoint() {
-
-    }
-
 }
