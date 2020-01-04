@@ -23,4 +23,8 @@ class MyGameSequence extends CGFobject{
             return this.sequence[this.sequence.length - 1];
         }
     }
+
+    getSequence() {
+        return this.sequence;
+    }
 }
