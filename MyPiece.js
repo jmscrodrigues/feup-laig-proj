@@ -1,5 +1,6 @@
 class MyPiece extends CGFobject {
     constructor(scene, coordX, coordZ, index,texture) { 
+        super(scene);
         this.scene = scene;
         this.coordX = coordX;
         this.coordZ = coordZ;
@@ -27,7 +28,7 @@ class MyPiece extends CGFobject {
         this.scene.translate(this.coordX, 0, this.coordZ);
         this.scene.registerForPick(this.index, this);
         this.piece.display();
-        this.piece.clearPickRegistration();
-        this.piece.popMatrix();
+        this.scene.clearPickRegistration();
+        this.scene.popMatrix();
     }
 }

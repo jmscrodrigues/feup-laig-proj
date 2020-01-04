@@ -31,7 +31,7 @@ class XMLscene extends CGFscene {
         this.validMoves = [];
         this.listP1 = [];
         this.listP2 = [];
-
+        this.counter = 0;
 
 
         //Initialize scene objects
@@ -39,7 +39,10 @@ class XMLscene extends CGFscene {
 
         this.gameOrchestrator.getBoardProl();
 
-        //this.gameOrchestrator.getValidMoves(this.pieces);
+        setInterval(function(){
+            this.gameOrchestrator.getValidMoves(this.pieces);}, 6000);
+
+        setInterval(this.gameOrchestrator.parseBoard(this.pieces), 6000);
 
 
 
@@ -110,12 +113,30 @@ class XMLscene extends CGFscene {
         this.lights[0].update();
         // ---- BEGIN Primitive drawing section
 
-        console.log(this.pieces);
-        if(this.pieces != []) {
-           //this.gameOrchestrator.getValidMoves(this.pieces);
-           this.gameOrchestrator.parseBoard(this.pieces);
-        }
         
+
+        console.log("board das pieces");
+        console.log(this.piecesBoard);
+
+        console.log("\n");
+
+        console.log("pieces");
+        console.log(this.pieces);
+
+        console.log("\n");
+
+        console.log("valid");
+        console.log(this.validMoves);
+
+
+
+        for (var s = 0; s < this.piecesBoard.length; s++) {
+
+            this.piecesBoard[s].display();
+        }
+
+        
+
 
         this.gameOrchestrator.display();
         // ---- END Primitive drawing section

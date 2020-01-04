@@ -164,17 +164,20 @@ class MyGameOrchestrator extends CGFobject {
                 if (board[t][z] == "r") {
                     var newPiece = new MyPiece(this.scene,t,z,index,null); //RED TEXT
                     newPiece.setTile = associationTile;
+                    this.scene.piecesBoard.push(newPiece);
 
                 }
                 else if (board[t][z] == "a") {
                     var newPiece = new MyPiece(this.scene,t,z,index,null); //YELLOW TEXT
                     newPiece.setTile = associationTile;
+                    this.scene.piecesBoard.push(newPiece);
                     
                 }
 
                 else if (board[t][z] == "b"){
                     var newPiece = new MyPiece(this.scene,t,z,index, null); //BLUE TEXT
                     newPiece.setTile = associationTile;
+                    this.scene.piecesBoard.push(newPiece);
                     
                 }
                 else {
@@ -183,6 +186,8 @@ class MyGameOrchestrator extends CGFobject {
                 index++;
             }
         }
+
+
     }
 
     drawPieces(pieces) {
