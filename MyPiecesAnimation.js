@@ -1,10 +1,10 @@
 class MyPiecesAnimations {
     constructor(currentLocation, finalLocation, elevation) {
         this.Xdelta = finalLocation[0] - currentLocation[0];
-        this.Ydelta = finalLocation[1] - currentLocation[1];
+        this.Ydelta = finalLocation[2] - currentLocation[2];
 
-        this.ZdeltaInitial = currentLocation[2] + elevation;
-        this.ZdeltaFinal = finalLocation[2] - elevation;
+        this.ZdeltaInitial = currentLocation[1] + elevation;
+        this.ZdeltaFinal = finalLocation[1] - elevation;
 
         this.finalLocation = finalLocation;
 
@@ -26,7 +26,7 @@ class MyPiecesAnimations {
             let time = t/1000;
             if (this.time == -1) {
                 this.time = time;
-                this.finalTime = this.time + this.timeAnimation;
+                this.finalTime = this.time + (this.timeAnimation*3);
             }
             else if (this.time > this.finalTime) { 
                 this.Tdelta = 0;
