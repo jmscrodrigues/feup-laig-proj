@@ -21,6 +21,7 @@ class XMLscene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         
         this.enableTextures(true);
+        this.setUpdatePeriod(50);
 
         this.tiles = [];
         this.colouredPieces = [];
@@ -35,6 +36,14 @@ class XMLscene extends CGFscene {
 
 
         //Initialize scene objects
+        this.scene1 = new MyScene1(this);
+
+        this.currentScene = this.scene1;
+
+        this.timer = new MyTimer(this, 5*60);
+        this.controlPanel =  new MyControlPanel(this);
+        this.announcementsPanel = new MyAnnouncementsPanel(this);
+
         this.gameOrchestrator = new MyGameOrchestrator(this);
 
 
@@ -45,9 +54,6 @@ class XMLscene extends CGFscene {
 
 
         this.setPickEnabled(true);
-
-    
-
     }
     
 
@@ -63,7 +69,7 @@ class XMLscene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(100, 100, 100), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(20, 20, 20), vec3.fromValues(0, 0, 0));
     }
 
     setDefaultAppearance() {
@@ -88,6 +94,10 @@ class XMLscene extends CGFscene {
 		}
 	}
 
+    update(t) {
+        this.scene1.update(t);
+        this.timer.update(t);
+    }
 
     display() {
 
@@ -120,10 +130,27 @@ class XMLscene extends CGFscene {
             this.piecesBoard[s].display();
         }
 
-        
+        this.currentScene.display();
 
+        this.pushMatrix();
+        this.currentScene.timerPosition();
+        this.timer.display();
+        this.popMatrix();
 
+        this.pushMatrix();
+        this.currentScene.controlPanelPosition();
+        this.controlPanel.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.currentScene.announcementsPanelPosition();
+        this.announcementsPanel.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.currentScene.boardPosition();
         this.gameOrchestrator.display();
+        this.popMatrix();
         // ---- END Primitive drawing section
     }
 }

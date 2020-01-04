@@ -62,4 +62,9 @@ class MyButton {
         this.material.setTexture(texture);
     }
 
+    chanegeTextureSides (texture) {
+        this.whiteMaterial.setTexture(texture);
+    }
+
+
 }
