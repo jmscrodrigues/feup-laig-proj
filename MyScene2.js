@@ -36,7 +36,7 @@ class MyScene2 {
 
         this.post = new MyCylinder (this.scene, 0, 1, 1, 1, 6, 6);
         this.topPost = new MyCylinder (this.scene, 0, 1, 0, 1, 6, 6);
-        
+
     }
 
     display() {
@@ -116,7 +116,7 @@ class MyScene2 {
 
     boardPosition() {
         this.scene.translate(2,1.2,-1.75);
-        this.scene.scale(0.5,1,0.5);
+        this.scene.scale(0.5,0.5,0.5);
     }
 
     announcementsPanelPosition() {
