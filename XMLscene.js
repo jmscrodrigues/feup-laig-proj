@@ -70,6 +70,8 @@ class XMLscene extends CGFscene {
 
         this.gameOrchestrator.orchestrate();
 
+        //setInterval( () => this.controlPanel.setScore(this.gameOrchestrator.countPoints(this.listP1), this.gameOrchestrator.countPoints(this.listP2)), 10000);
+
         
         this.setPickEnabled(true);
     }

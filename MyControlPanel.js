@@ -19,8 +19,8 @@ class MyControlPanel {
 
         this.main = new MyButton(this.scene, 'images/rock.jpg')
 
-        this.player1 = new MyButton(this.scene, 'images/player 1.png');
-        this.player2 = new MyButton(this.scene, 'images/player 2.png');
+        this.player1 = new MyButton(this.scene, 'images/player1.png');
+        this.player2 = new MyButton(this.scene, 'images/player2.png');
 
 
         this.score = new MyButton(this.scene, 'images/score board.png')

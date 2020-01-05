@@ -23,7 +23,7 @@ class MyGameOrchestrator extends CGFobject {
         this.board = new MyBoard(this.scene);
         //this.theme = new MySceneGraph(this.scene);  ADD MySceneGraph with the needed changes
         this.prolog = new MyPrologInterface(this.scene); 
-        //this.animator = new MyAnimator(this.scene);
+        this.announcements = new MyAnnouncementsPanel(this.scene);
         this.gameSequence = new MyGameSequence(this.scene);
 
         this.pieceTexture = new CGFtexture(this.scene,  "images/piece.jpg");
@@ -570,6 +570,14 @@ class MyGameOrchestrator extends CGFobject {
 
             case gameStates.playerPlay:
                 console.log("Player Play");
+                if (this.scene.playerListPicker == 0) {
+                    this.announcements.changeAnnoucement("player1");
+                }
+
+                else {
+                    this.announcements.changeAnnoucement("player2");
+
+                }
 
                 break;
 
@@ -619,16 +627,6 @@ class MyGameOrchestrator extends CGFobject {
         }
 
     }
-
-    update(time) {
-        //this.animator.update(time);
-    }
-
-
-
-
-
-
 
 
     display() {
