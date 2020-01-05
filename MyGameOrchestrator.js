@@ -7,6 +7,8 @@ const gameStates = Object.freeze({
     gamePlayerBotHard : "GamePlayerBotHard",
     playerPlay : "PlayerPlay",
     gameBotBot : "GameBotBot",
+    gameSequence : "GameSequence",
+    undo : "Undo",
     gameOver: "GameOver"
 });
 
@@ -21,7 +23,6 @@ class MyGameOrchestrator extends CGFobject {
 
 
         this.board = new MyBoard(this.scene);
-        //this.theme = new MySceneGraph(this.scene);  ADD MySceneGraph with the needed changes
         this.prolog = new MyPrologInterface(this.scene); 
         this.announcements = new MyAnnouncementsPanel(this.scene);
         this.gameSequence = new MyGameSequence(this.scene);
@@ -322,6 +323,8 @@ class MyGameOrchestrator extends CGFobject {
     initiateGame() {
         this.getBoardProl();
 
+        setTimeout( () => this.gameSequence.setInitialBoard(this.scene.pieces), 2500);
+
         setTimeout( () => this.getValidMoves(this.scene.pieces), 2500);
 
         setTimeout( () => this.parseBoard(this.scene.pieces), 3000);
@@ -366,6 +369,9 @@ class MyGameOrchestrator extends CGFobject {
         else {
             //FAZER A ANIMAÇÃO INVERSA DO MOVE
             this.gameSequence.undoMove();
+            
+            setTimeout(() => this.scene.pieces = this.gameSequence.getBoard(), 2500);
+            
         }
     }
 
@@ -584,6 +590,8 @@ class MyGameOrchestrator extends CGFobject {
             case gameStates.botPlay:
                 console.log("Bot play");
 
+                this.gameSequence.setBoard(this.scene.pieces);
+
                 this.botPlay();
 
                 break;
@@ -621,6 +629,11 @@ class MyGameOrchestrator extends CGFobject {
                     console.log("It's a TIE!");
                 }
                 break;
+
+            case gameStates.undo:
+                if (this.scene.gameMode == "pvp"  || this.scene.gameMode == "pvm") {
+
+                }
 
             default:
                 break;

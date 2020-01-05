@@ -162,6 +162,7 @@ class XMLscene extends CGFscene {
                             for(var z = 0; z < this.validMoves.length; z++) {
                                 if (this.validMoves[z].toString() == play) {
                                     this.lastPicked = null;
+                                    this.gameOrchestrator.gameSequence.setBoard(this.pieces);
                                     this.gameOrchestrator.movePiece(this.pickResults[i][0].getCoordX(), this.pickResults[i][0].getCoordZ(),this.pieces);
                                     if(this.gameMode != "pvp") {
                                         setTimeout(() => this.gameOrchestrator.setGameState(gameStates.botPlay),2200);
