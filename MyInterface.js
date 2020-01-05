@@ -27,6 +27,8 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'ActiveCamera', this.scene.cameras).name('ActiveCamera').onChange(this.scene.changeActiveCamera.bind(this.scene));
 
         
+        this.gui.add(this.scene, 'ActiveScene', this.scene.scenes).name('Scene').onChange(this.scene.changeActiveScene.bind(this.scene));
+
 
         return true;
     }

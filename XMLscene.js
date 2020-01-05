@@ -44,6 +44,10 @@ class XMLscene extends CGFscene {
         this.scene1 = new MyScene1(this);
         this.scene2 = new MyScene2(this);
 
+        this.ActiveScene = 0;
+        this.scenes = {'Boat':0, 'Umbrela':1};
+        this.activeScenes = [this.scene1, this.scene2];
+
         this.currentScene = this.scene1;
 
         this.timer = new MyTimer(this, 5*60);
@@ -119,6 +123,11 @@ class XMLscene extends CGFscene {
 				this.pickResults.splice(0, this.pickResults.length);
 			}
 		}
+    }
+
+    changeActiveScene() {
+        this.currentScene = this.activeScenes[this.ActiveScene];
+        this.cameraAnimation.reSetCameta(this.from, this.currentScene.cameraCoords()[this.ActiveCamera], 5, this.target, this.currentScene.cameraViewPoints()[this.ActiveCamera]);
     }
 
     changeActiveCamera() {
