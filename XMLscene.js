@@ -16,6 +16,9 @@ class XMLscene extends CGFscene {
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
+
+        //TODO: BOTAO UNDO E GAMESEQUENCE
+
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
@@ -135,7 +138,13 @@ class XMLscene extends CGFscene {
                                 if (this.validMoves[z].toString() == play) {
                                     this.lastPicked = null;
                                     this.gameOrchestrator.movePiece(this.pickResults[i][0].getCoordX(), this.pickResults[i][0].getCoordZ(),this.pieces);
-                                    setTimeout(() => this.gameOrchestrator.setGameState(gameStates.botPlay),1500);
+                                    if(this.gameMode != "pvp") {
+                                        setTimeout(() => this.gameOrchestrator.setGameState(gameStates.botPlay),2200);
+                                    }
+                                    else {
+                                        setTimeout(() => this.gameOrchestrator.setGameState(gameStates.gamePlayerPlayer),2200);
+
+                                    }
                                     break;
                                 }
                             }

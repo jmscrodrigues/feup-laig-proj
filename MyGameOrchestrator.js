@@ -113,17 +113,21 @@ class MyGameOrchestrator extends CGFobject {
             //FAZER ALGO COM A PEÇA, data[1]
             if(this.scene.playerListPicker == 0) {
                 this.scene.listP1.push(data[1]);
-                console.log("PLAYER LIST");
+                if(this.scene.gameMode == "pvp") {
+                    this.scene.playerListPicker = 1;
+                }
                 console.log(this.scene.listP1);
             }
+            else {
+                this.scene.listP2.push(data[1]);
+                this.scene.playerListPicker = 0;
+                console.log(this.scene.listP2);
 
-            this.gameSequence.addMove(new MyMove(xCoord, zCoord, data[1])); //ADICIONA A SEQUENCIA DO JOGO
+            }
 
-            //FAZER A ANIMAÇAO DA PEÇA PARA O RESPETIVO CONTAINER
-            //ADICIONAR A LISTA DO PLAYER HUMANO EM QUESTAO (talvez passar como parametro a esta função)
+            this.gameSequence.addMove(new MyMove(xCoord, zCoord, data[1]));
 
-            console.log("FIZ MOVIMENTO!");
-        
+            //TODO: ANIMAÇÃO DO MOVE
         };
 
         let requestString = 'move(' + xCoord + ',' + zCoord  + ',' + '[' + '[' + board[0] + ']' + ',' + '[' + board[1] + ']' + ',' + 
@@ -144,7 +148,7 @@ class MyGameOrchestrator extends CGFobject {
             this.scene.pieces = data[0];
 
             if (number == 1) {
-                this.scene.listP1 == data[1];
+                this.scene.listP1 = data[1];
             }
             else if(number == 2) {
                 this.scene.listP2 = data[1];
@@ -159,7 +163,8 @@ class MyGameOrchestrator extends CGFobject {
             this.gameSequence.addMove(new MyMove(data[2], data[3], data[4])); //ADICIONA A SEQUENCIA DO JOGO
 
 
-            //ANIMACAO DA PEÇA COM ESSAS COORDENADAS PARA O CONTAINER ESPECIFICO
+            //TODO: ANIMAÇÃO DO MOVE
+
             //REMOVER O APONTADOR PARA O TILE DA PEÇA
         };
 
@@ -210,20 +215,16 @@ class MyGameOrchestrator extends CGFobject {
 
             console.log("MOVE: " + [data[2], data[3]]);
 
-            //X = data[2];
-
-            //Z = data[3];
 
             //Peca = data[4]
 
             this.gameSequence.addMove(new MyMove(data[2], data[3], data[4])); //ADICIONA A SEQUENCIA DO JOGO
 
 
-            //ANIMACAO DA PEÇA COM ESSAS COORDENADAS PARA O CONTAINER ESPECIFICO
+            //TODO: ANIMAÇÃO DO MOVE
+
+
             //REMOVER O APONTADOR PARA O TILE DA PEÇA
-            //LISTA DO BOT JA ATUALIZADA (DATA[1])
-
-
 
         };
 
@@ -340,7 +341,7 @@ class MyGameOrchestrator extends CGFobject {
 
         setTimeout( () => this.askPlayAIEasy(this.scene.pieces,list,this.scene.validMoves, number),5000);
 
-        setTimeout(() => console.log(list), 7000);
+        setTimeout( () => console.log(list), 7000);
     }
 
 
@@ -500,7 +501,7 @@ class MyGameOrchestrator extends CGFobject {
 
     }
 
-    botPlay() {
+    async botPlay() {
         var cancel = 0;
 
 
@@ -509,16 +510,16 @@ class MyGameOrchestrator extends CGFobject {
         
             this.getValidMoves(this.scene.pieces);
 
-            setTimeout( ()=> cancel = this.gameOver(),5000);
+            setTimeout( ()=> cancel = this.gameOver(),2000);
 
             if (cancel == 1) {
                 return;
             }
 
-            setTimeout(() => this.easyBotPlay(this.scene.listP2, 2),6000); 
+            setTimeout(() => this.easyBotPlay(this.scene.listP2, 2),3000); 
 
 
-            setTimeout(() => this.setGameState(gameStates.playerPlay),10000);
+            setTimeout(() => this.setGameState(gameStates.playerPlay),8000);
 
 
         }
@@ -564,8 +565,7 @@ class MyGameOrchestrator extends CGFobject {
                 break;
 
             case gameStates.gamePlayerPlayer:
-                console.log("PP");
-
+                this.setGameState(gameStates.playerPlay);
                 break;
 
             case gameStates.playerPlay:
