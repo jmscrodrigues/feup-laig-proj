@@ -26,6 +26,32 @@ class MyGameOrchestrator extends CGFobject {
         //this.animator = new MyAnimator(this.scene);
         this.gameSequence = new MyGameSequence(this.scene);
 
+        this.pieceTexture = new CGFtexture(this.scene,  "images/piece.jpg");
+
+        this.pieceRmaterial = new CGFappearance(this.scene);
+        this.pieceRmaterial.setAmbient(1, 0, 0, 1.0);
+        this.pieceRmaterial.setDiffuse(1, 0, 0, 1.0);
+        this.pieceRmaterial.setSpecular(1, 0, 0, 1.0);
+        this.pieceRmaterial.setShininess(10.0);
+        this.pieceRmaterial.setTexture(this.pieceTexture);
+        this.pieceRmaterial.setTextureWrap('REPEAT','REPEAT');
+
+        this.pieceBmaterial = new CGFappearance(this.scene);
+        this.pieceBmaterial.setAmbient(0, 0, 1, 1.0);
+        this.pieceBmaterial.setDiffuse(0, 0, 1, 1.0);
+        this.pieceBmaterial.setSpecular(0, 0, 1, 1.0);
+        this.pieceBmaterial.setShininess(10.0);
+        this.pieceBmaterial.setTexture(this.pieceTexture);
+        this.pieceBmaterial.setTextureWrap('REPEAT','REPEAT');
+
+        this.pieceYmaterial = new CGFappearance(this.scene);
+        this.pieceYmaterial.setAmbient(1, 1, 0, 1.0);
+        this.pieceYmaterial.setDiffuse(1, 1, 0, 1.0);
+        this.pieceYmaterial.setSpecular(1, 1, 0, 1.0);
+        this.pieceYmaterial.setShininess(10.0);
+        this.pieceYmaterial.setTexture(this.pieceTexture);
+        this.pieceYmaterial.setTextureWrap('REPEAT','REPEAT');
+
     }
 
     
@@ -252,20 +278,20 @@ class MyGameOrchestrator extends CGFobject {
                     
                 }
                 if (board[t][z] == "r") {
-                    var newPiece = new MyPiece(this.scene,t,z,index,null); //RED TEXT
+                    var newPiece = new MyPiece(this.scene,t,z,index,this.pieceRmaterial); //RED TEXT
                     newPiece.setTile = associationTile;
                     this.scene.piecesBoard.push(newPiece);
 
                 }
                 else if (board[t][z] == "a") {
-                    var newPiece = new MyPiece(this.scene,t,z,index,null); //YELLOW TEXT
+                    var newPiece = new MyPiece(this.scene,t,z,index,this.pieceYmaterial); //YELLOW TEXT
                     newPiece.setTile = associationTile;
                     this.scene.piecesBoard.push(newPiece);
                     
                 }
 
                 else if (board[t][z] == "b"){
-                    var newPiece = new MyPiece(this.scene,t,z,index, null); //BLUE TEXT
+                    var newPiece = new MyPiece(this.scene,t,z,index,this.pieceBmaterial); //BLUE TEXT
                     newPiece.setTile = associationTile;
                     this.scene.piecesBoard.push(newPiece);
                     

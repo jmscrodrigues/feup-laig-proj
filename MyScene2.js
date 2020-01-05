@@ -36,6 +36,7 @@ class MyScene2 {
 
         this.post = new MyCylinder (this.scene, 0, 1, 1, 1, 6, 6);
         this.topPost = new MyCylinder (this.scene, 0, 1, 0, 1, 6, 6);
+        
     }
 
     display() {
@@ -105,7 +106,6 @@ class MyScene2 {
         this.boatProw.display();
         this.scene.popMatrix();
         */
-        
     }
 
     //Tem as transformacoes necessarias para por os elementos no local certo
@@ -124,7 +124,9 @@ class MyScene2 {
     }
 
     piecesPosition() {
-
+        this.scene.translate(2,1.2,1.75);
+        this.scene.scale(0.2,0.2,0.2);
+        this.scene.rotate(-Math.PI/2, 1, 0, 0);
     } 
 
     controlPanelPosition() {
