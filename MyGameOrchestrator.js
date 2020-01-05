@@ -107,12 +107,15 @@ class MyGameOrchestrator extends CGFobject {
         let rep = function(data) {
 
             
-            console.log(data[0]);
-
             this.scene.pieces = data[0];
 
 
             //FAZER ALGO COM A PEÇA, data[1]
+            if(this.scene.playerListPicker == 0) {
+                this.scene.listP1.push(data[1]);
+                console.log("PLAYER LIST");
+                console.log(this.scene.listP1);
+            }
 
             this.gameSequence.addMove(new MyMove(xCoord, zCoord, data[1])); //ADICIONA A SEQUENCIA DO JOGO
 
@@ -147,6 +150,7 @@ class MyGameOrchestrator extends CGFobject {
                 this.scene.listP2 = data[1];
             }
 
+            console.log("MOVE: " + [data[2], data[3]]);
             //X = data[2];
 
             //Y = data[3];
@@ -203,6 +207,8 @@ class MyGameOrchestrator extends CGFobject {
             this.scene.pieces = data[0];
 
             this.scene.listP2 = data[1];
+
+            console.log("MOVE: " + [data[2], data[3]]);
 
             //X = data[2];
 
@@ -450,7 +456,7 @@ class MyGameOrchestrator extends CGFobject {
 
     gameOver(){
         if (this.scene.validMoves.length == 0) {
-            this.gameState = gameStates.gameOver;
+            this.setgameState = gameStates.gameOver;
             this.orchestrate;
             return 1;
         }
@@ -503,21 +509,16 @@ class MyGameOrchestrator extends CGFobject {
         
             this.getValidMoves(this.scene.pieces);
 
-            setTimeout( ()=> cancel = this.gameOver(),3000);
+            setTimeout( ()=> cancel = this.gameOver(),5000);
 
             if (cancel == 1) {
                 return;
             }
 
-            setTimeout(() => this.easyBotPlay(this.scene.listP2, 2),4000); 
+            setTimeout(() => this.easyBotPlay(this.scene.listP2, 2),6000); 
 
 
-            setTimeout(() => this.setGameState(gameStates.playerPlay),5000);
-
-
-
-            setTimeout(() => this.orchestrate(),6000);
-
+            setTimeout(() => this.setGameState(gameStates.playerPlay),10000);
 
 
         }
@@ -526,19 +527,16 @@ class MyGameOrchestrator extends CGFobject {
 
             this.getValidMoves(this.scene.pieces);
 
-            setTimeout( ()=> cancel = this.gameOver(),3000);
+            setTimeout( ()=> cancel = this.gameOver(),5000);
 
             if (cancel == 1) {
                 return;
             }
 
-            setTimeout(() => this.hardBotPlay(this.scene.listP2),4000); 
+            setTimeout(() => this.hardBotPlay(this.scene.listP2),6000); 
 
 
-            setTimeout(() => this.setGameState(gameStates.playerPlay),5000);
-
-
-            setTimeout(() => this.orchestrate(),6000);
+            setTimeout(() => this.setGameState(gameStates.playerPlay),10000);
 
         }
 
@@ -570,12 +568,12 @@ class MyGameOrchestrator extends CGFobject {
 
                 break;
 
-            case playerPlay:
+            case gameStates.playerPlay:
                 console.log("Player Play");
 
                 break;
 
-            case botPlay:
+            case gameStates.botPlay:
                 console.log("Bot play");
 
                 this.botPlay();

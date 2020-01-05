@@ -24,8 +24,9 @@ class MyPiece extends CGFobject {
     }
 
     display() {
-        this.scene.apply(this.material);
+        this.material.apply(this.material);
         this.scene.pushMatrix();
+        //this.scene.rotate(-Math.PI/2, 1, 0, 0);
         this.scene.translate(this.coordX, 0, this.coordZ);
         this.scene.registerForPick(this.index, this);
         this.piece.display();

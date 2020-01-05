@@ -41,6 +41,7 @@ class XMLscene extends CGFscene {
 
         this.p1flag = 0;
         this.p2flag = 0;
+        this.playerListPicker = 0;
 
 
         //Initialize scene objects
@@ -106,25 +107,36 @@ class XMLscene extends CGFscene {
                         else {
                             console.log("Picked object: " + obj + ", with pick id " + customId);	
                         }
+
                         if(this.lastPicked != customId) {
                             this.lastPicked = customId;
                         }
-                        else if (this.lastPicked == customId && (customId > 0) && (customId < 65) && (this.gameOrchestrator.getGameState == gameStates.playerPlay)){
+                        else if ((this.lastPicked == customId) && (customId > 0) && (customId < 65) && (this.gameOrchestrator.getGameState() == gameStates.playerPlay)){
+                            console.log("Selected piece: " + obj + ", with pick id " + customId + "with coords" + this.pickResults[i][0].getCoordX() + "," + this.pickResults[i][0].getCoordZ());	
+
                             this.gameOrchestrator.getValidMoves(this.pieces);
 
-                            var play = [this.pickResults[i][0].getCoordX(), this.pickResults[i][0].getCoordZ()];
+
+                            var play = [this.pickResults[i][0].getCoordX(),this.pickResults[i][0].getCoordZ()].toString();
+
+                            console.log(play);
+
 
                             if(this.validMoves.length == 0) {
+
                                 this.gameOrchestrator.setGameState(gameStates.gameOver);
-                                this.gameOrchestrator.orchestrate();
+                            }
+
+                            else if(this.pieces[this.pickResults[i][0].getCoordX()][this.pickResults[i][0].getCoordZ() == "*"] ) {
+                                console.log("Already removed piece!");
                             }
 
                             for(var z = 0; z < this.validMoves.length; z++) {
-                                if (this.validMoves[z] == play) {
+                                if (this.validMoves[z].toString() == play) {
                                     this.lastPicked = null;
                                     this.gameOrchestrator.movePiece(this.pickResults[i][0].getCoordX(), this.pickResults[i][0].getCoordZ(),this.pieces);
                                     setTimeout(() => this.gameOrchestrator.setGameState(gameStates.botPlay),1500);
-                                    setTimeout(() => this.gameOrchestrator.orchestrate(), 3000);
+                                    break;
                                 }
                             }
                         }
@@ -191,7 +203,7 @@ class XMLscene extends CGFscene {
 
         for (var s = 0; s < this.piecesBoard.length; s++) {
             this.pushMatrix();
-            //this.currentScene.piecesPosition();
+            this.currentScene.piecesPosition();
             this.piecesBoard[s].display();
             this.popMatrix();
 
