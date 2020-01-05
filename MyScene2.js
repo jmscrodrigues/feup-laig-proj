@@ -111,15 +111,16 @@ class MyScene2 {
     //Tem as transformacoes necessarias para por os elementos no local certo
 
     timerPosition() {
-
+        this.scene.translate(-2,1.2,0);
     }
 
     boardPosition() {
-
+        this.scene.translate(2,1.2,-1.75);
+        this.scene.scale(0.5,1,0.5);
     }
 
     announcementsPanelPosition() {
-
+        this.scene.translate(-6,1,0);
     }
 
     piecesPosition() {
@@ -127,22 +128,23 @@ class MyScene2 {
     } 
 
     controlPanelPosition() {
-
+        this.scene.translate(3, -1.1, 0);
+        this.scene.rotate(Math.PI, 0, 0, 1);
     }
     
     //Tem as coodenadas da camera e o ponto para onde esta a ver
 
     cameraCoords() {
-        let coords0 = vec3.fromValues(5, 2, 0);
-        let coords1 = vec3.fromValues(3, 3, 1);
-        let coords2 = vec3.fromValues(-3,3,1);
+        let coords0 = vec3.fromValues(10, -30, 1);
+        let coords1 = vec3.fromValues(0, 18, 15);
+        let coords2 = vec3.fromValues(0,18, -15);
         return new Array(coords0,  coords1, coords2);
     }
 
     cameraViewPoints() {
-        let VP0 = vec3.fromValues(0, 0, 0);
-        let VP1 = vec3.fromValues(0, 1, 1);
-        let VP2 = vec3.fromValues(0,1,1);
+        let VP0 = vec3.fromValues(10, 0, 0);
+        let VP1 = vec3.fromValues(0, 2, 0);
+        let VP2 = vec3.fromValues(0,2,0);
         return new Array(VP0,VP1,VP2);
     }
 }

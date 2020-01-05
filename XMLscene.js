@@ -42,6 +42,7 @@ class XMLscene extends CGFscene {
 
         //Initialize scene objects
         this.scene1 = new MyScene1(this);
+        this.scene2 = new MyScene2(this);
 
         this.currentScene = this.scene1;
 
