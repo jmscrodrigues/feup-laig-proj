@@ -29,7 +29,9 @@ class XMLscene extends CGFscene {
 
         this.tiles = [];
         this.colouredPieces = [];
+        
 
+        
 
         this.piecesBoard = [];
         this.pieces = [];
@@ -72,6 +74,27 @@ class XMLscene extends CGFscene {
 
         //setInterval( () => this.controlPanel.setScore(this.gameOrchestrator.countPoints(this.listP1), this.gameOrchestrator.countPoints(this.listP2)), 10000);
 
+        //BOARD PARA TI, INCORRIGIVEL DO CRL
+
+        this.boardJustino = [];
+        this.indexJustino = 1;
+
+        for(var j = 0; j < 8; j++) {
+            for (var k = 0; k < 8; k++) {
+                if(j == 7 && k == 7) {
+                    
+                }
+                else {
+                    this.boardJustino.push(new MyPiece(this, j, k,this.indexJustino, this.gameOrchestrator.pieceRmaterial));
+                    this.indexJustino++;
+                }
+                
+            }
+        }
+
+
+
+        // FIM
         
         this.setPickEnabled(true);
     }
@@ -241,6 +264,11 @@ class XMLscene extends CGFscene {
         this.currentScene.boardPosition();
         this.gameOrchestrator.display();
         this.popMatrix();
+
+        for(var kk = 0; kk < this.boardJustino.length; kk++) {
+            this.boardJustino[kk].display();
+
+        }
         // ---- END Primitive drawing section
     }
 }
