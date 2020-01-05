@@ -1,14 +1,14 @@
 class MyPiece extends CGFobject {
-    constructor(scene, coordX, coordZ, index,texture) { 
+    constructor(scene, coordX, coordZ, index,material) { 
         super(scene);
         this.scene = scene;
         this.coordX = coordX;
         this.coordZ = coordZ;
         this.tile = null; //getTile() para a coordenada X e Z
-        this.texture = texture;
+        this.material = material;
         this.index = index;
 
-        this.piece = new MyHexagonalPrism(this.scene, this.texture); 
+        this.piece = new MyHexagonalPrism(this.scene, this.material); 
     }
 
     getCoordX() {
@@ -24,6 +24,7 @@ class MyPiece extends CGFobject {
     }
 
     display() {
+        this.scene.apply(this.material);
         this.scene.pushMatrix();
         this.scene.translate(this.coordX, 0, this.coordZ);
         this.scene.registerForPick(this.index, this);

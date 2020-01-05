@@ -11,7 +11,7 @@ class MyScene1 {
         this.cabinTexture = new CGFtexture(this.scene, "images/cabin.jpg");
         this.cabinRoofTexture = new CGFtexture(this.scene,  "images/roof.jpg");
         this.ropeTexture = new CGFtexture(this.scene,  "images/rope.jpg");
-
+        
         this.watermaterial = new CGFappearance(this.scene);
         this.watermaterial.setAmbient(1, 1, 1, 1.0);
         this.watermaterial.setDiffuse(1, 1, 1, 1.0);
@@ -51,7 +51,6 @@ class MyScene1 {
         this.ropematerial.setShininess(10.0);
         this.ropematerial.setTexture(this.ropeTexture);
         this.ropematerial.setTextureWrap('REPEAT','REPEAT');
-
 
         this.waterShader = new CGFshader(this.scene.gl, "shaders/water.vert", "shaders/water.frag");
 
@@ -287,9 +286,9 @@ class MyScene1 {
     }
 
     piecesPosition() {
-        this.scene.translate(0,1,0);
-        this.scene.scale(0.5,0.5,0.5);
-        this.scene.rotate(Math.PI/2, 0, 1, 0);
+        this.scene.translate(0.2,1,0.9);
+        this.scene.scale(0.02,0.02,0.02);
+        this.scene.rotate(-Math.PI/2, 1, 0, 0);
     } 
 
     controlPanelPosition() {
