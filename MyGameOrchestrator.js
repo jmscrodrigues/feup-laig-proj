@@ -5,6 +5,7 @@ const gameStates = Object.freeze({
     gamePlayerPlayer : "GamePlayerPlayer",
     gamePlayerBotEasy : "GamePlayerBotEasy",
     gamePlayerBotHard : "GamePlayerBotHard",
+    playerPlay : "PlayerPlay",
     gameBotBot : "GameBotBot",
     gameOver: "GameOver"
 });
@@ -35,6 +36,9 @@ class MyGameOrchestrator extends CGFobject {
         this.orchestrate();
     }
 
+    getGameState() {
+        return this.gameState;
+    }
 
     /* Prolog connection to get the initial board */
 
@@ -460,7 +464,57 @@ class MyGameOrchestrator extends CGFobject {
         setTimeout(() => this.easyBotPlay(this.scene.listP2, 2),16000);
 
 
-        setTimeout(() => this.orchestrate(cancel),23000);
+        setTimeout(() => this.orchestrate(),23000);
+
+    }
+
+    botPlay() {
+        var cancel = 0;
+
+
+        if(this.scene.gameDifficulty == "medium") {
+
+        
+            this.getValidMoves(this.scene.pieces);
+
+            setTimeout( ()=> cancel = this.gameOver(),3000);
+
+            if (cancel == 1) {
+                return;
+            }
+
+            setTimeout(() => this.easyBotPlay(this.scene.listP2, 2),4000); 
+
+
+            setTimeout(() => this.setGameState(gameStates.playerPlay),5000);
+
+
+
+            setTimeout(() => this.orchestrate(),6000);
+
+
+
+        }
+
+        else {
+
+            this.getValidMoves(this.scene.pieces);
+
+            setTimeout( ()=> cancel = this.gameOver(),3000);
+
+            if (cancel == 1) {
+                return;
+            }
+
+            setTimeout(() => this.hardBotPlay(this.scene.listP2),4000); 
+
+
+            setTimeout(() => this.setGameState(gameStates.playerPlay),5000);
+
+
+            setTimeout(() => this.orchestrate(),6000);
+
+        }
 
     }
 
@@ -490,15 +544,29 @@ class MyGameOrchestrator extends CGFobject {
 
                 break;
 
+            case playerPlay:
+                console.log("Player Play");
+
+                break;
+
+            case botPlay:
+                console.log("Bot play");
+
+                this.botPlay();
+
+                break;
+
             case gameStates.gamePlayerBotEasy:
-                // INICIO DO LOOP JOGADOR BOT EASY
                 console.log("EASY PB");
+
+                this.setGameState(gameStates.playerPlay);
 
                 break;
 
             case gameStates.gamePlayerBotHard:
-                // INICIO DO LOOP JOGADOR BOT HARD
                 console.log("HARD PB");
+
+                this.setGameState(gameStates.playerPlay);
 
                 break;
 

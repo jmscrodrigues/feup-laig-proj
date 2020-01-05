@@ -109,16 +109,35 @@ class XMLscene extends CGFscene {
                         if(this.lastPicked != customId) {
                             this.lastPicked = customId;
                         }
-                        else if (this.lastPicked == customId && (customId > 0) && (customId < 65)){
-                            this.gameOrchestrator.movePiece(this.pickResults[i][0].getCoordX(), this.pickResults[i][0].getCoordZ(),this.pieces);
-                            this.lastPicked = null;
+                        else if (this.lastPicked == customId && (customId > 0) && (customId < 65) && (this.gameOrchestrator.getGameState == gameStates.playerPlay)){
+                            this.gameOrchestrator.getValidMoves(this.pieces);
+
+                            var play = [this.pickResults[i][0].getCoordX(), this.pickResults[i][0].getCoordZ()];
+
+                            if(this.validMoves.length == 0) {
+                                this.gameOrchestrator.setGameState(gameStates.gameOver);
+                                this.gameOrchestrator.orchestrate();
+                            }
+
+                            for(var z = 0; z < this.validMoves.length; z++) {
+                                if (this.validMoves[z] == play) {
+                                    this.lastPicked = null;
+                                    this.gameOrchestrator.movePiece(this.pickResults[i][0].getCoordX(), this.pickResults[i][0].getCoordZ(),this.pieces);
+                                    setTimeout(() => this.gameOrchestrator.setGameState(gameStates.botPlay),1500);
+                                    setTimeout(() => this.gameOrchestrator.orchestrate(), 3000);
+                                }
+                            }
                         }
                         else if (this.lastPicked == customId && (customId > 99) && (customId < 105)) {
+                            this.lastPicked = null;
                             this.gameOrchestrator.parseGameInputs(customId);
+                            
                         }
 
                         else if(this.lastPicked == customId && (customId == 200)) {
+                            this.lastPicked = null;
                             this.gameOrchestrator.startGame();
+                            
                         }
 					}
 				}
