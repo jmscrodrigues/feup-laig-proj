@@ -105,12 +105,17 @@ class MyGameOrchestrator extends CGFobject {
     /* Prolog connection to get a play from the easy difficulty bot */
 
 
-    askPlayAIEasy(board, aiList, validMoves) {
+    askPlayAIEasy(board, aiList, validMoves,number) {
         let rep = function(data) {
 
             this.scene.pieces = data[0];
 
-            this.scene.listP2 = data[1];
+            if (number == 1) {
+                this.scene.listP1 == data[1];
+            }
+            else if(number == 2) {
+                this.scene.listP2 = data[1];
+            }
 
             //X = data[2];
 
@@ -122,7 +127,6 @@ class MyGameOrchestrator extends CGFobject {
 
             //ANIMACAO DA PEÇA COM ESSAS COORDENADAS PARA O CONTAINER ESPECIFICO
             //REMOVER O APONTADOR PARA O TILE DA PEÇA
-            //LISTA DO BOT JA ATUALIZADA (DATA[1])
         };
 
         var movesString = '[';
@@ -291,23 +295,27 @@ class MyGameOrchestrator extends CGFobject {
 
     /* Function to get a play from bot in easy difficulty */
 
-    easyBotPlay() {
+    async easyBotPlay(list,number) {
         setTimeout( () => this.getValidMoves(this.scene.pieces),2000);
 
-        setTimeout( () => this.askPlayAIEasy(this.scene.pieces,this.scene.listP2,this.scene.validMoves),5000);
+        if (this.scene.validMoves.length == 0) {
+            return;
+        }
 
-        setTimeout(() => console.log(this.scene.listP2), 7000);
+        setTimeout( () => this.askPlayAIEasy(this.scene.pieces,list,this.scene.validMoves, number),5000);
+
+        setTimeout(() => console.log(list), 7000);
     }
 
 
     /* Function to get a play from bot in hard difficulty */
 
-    hardBotPlay() {
+    hardBotPlay(list) {
         setTimeout( () => this.getValidMoves(this.scene.pieces),2000);
 
-        setTimeout( () => this.askPlayAIHard(this.scene.pieces,this.scene.listP2,this.scene.validMoves),5000);
+        setTimeout( () => this.askPlayAIHard(this.scene.pieces,list,this.scene.validMoves),5000);
 
-        setTimeout(() => console.log(this.scene.listP2), 7000);
+        setTimeout(() => console.log(list), 7000);
     }
 
 
@@ -410,6 +418,52 @@ class MyGameOrchestrator extends CGFobject {
         return (Math.floor(a/5) + Math.floor(b/5) + Math.floor(r/5));
     }
 
+    gameOver(){
+        if (this.scene.validMoves.length == 0) {
+            this.gameState = gameStates.gameOver;
+            this.orchestrate;
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    
+    }
+
+
+    async botvsBotGameLoop() {
+        var cancel = 0;
+
+        this.getValidMoves(this.scene.pieces);
+
+        setTimeout( ()=> cancel = this.gameOver(),3000);
+
+        if (cancel == 1) {
+            return;
+        }
+
+
+        setTimeout(() => this.easyBotPlay(this.scene.listP1, 1),4000); 
+
+
+        setTimeout(() => this.getValidMoves(this.scene.pieces),11000); 
+
+
+        setTimeout( () => cancel = this.gameOver(),13000);
+
+        if (cancel == 1) {
+            return;
+        }
+
+
+
+        setTimeout(() => this.easyBotPlay(this.scene.listP2, 2),16000);
+
+
+        setTimeout(() => this.orchestrate(cancel),23000);
+
+    }
+
 
 
     orchestrate() {
@@ -432,7 +486,6 @@ class MyGameOrchestrator extends CGFobject {
                 break;
 
             case gameStates.gamePlayerPlayer:
-                // INICIO DO LOOP JOGADOR JOGADOR
                 console.log("PP");
 
                 break;
@@ -450,8 +503,7 @@ class MyGameOrchestrator extends CGFobject {
                 break;
 
             case gameStates.gamePlayerBotBot:
-                // INICIO DO LOOP JOGADOR BOT BOT
-
+                this.botvsBotGameLoop();
                 console.log("BB");
 
                 break;

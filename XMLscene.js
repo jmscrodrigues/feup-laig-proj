@@ -39,6 +39,9 @@ class XMLscene extends CGFscene {
         this.gameDifficulty = "medium";
         this.gameMode = "pvp";
 
+        this.p1flag = 0;
+        this.p2flag = 0;
+
 
         //Initialize scene objects
         this.scene1 = new MyScene1(this);
@@ -58,8 +61,7 @@ class XMLscene extends CGFscene {
 
         this.gameOrchestrator.orchestrate();
 
-        this.gameOrchestrator.easyBotPlay();
-
+        
         this.setPickEnabled(true);
     }
     
