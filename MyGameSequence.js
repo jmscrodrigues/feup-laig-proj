@@ -9,9 +9,9 @@ class MyGameSequence extends CGFobject{
         this.sequence = [];
     }
 
-    undoMove() {
+    undoMove(move) {
         this.sequence.pop();
-        //Fazer animação
+        //FAZER ANIMAÇAO COM OS DADOS DA MOVE (MYMOVE)
     }
 
     addMove(move) {

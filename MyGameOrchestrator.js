@@ -27,6 +27,8 @@ class MyGameOrchestrator extends CGFobject {
         this.announcements = new MyAnnouncementsPanel(this.scene);
         this.gameSequence = new MyGameSequence(this.scene);
 
+        this.previousGameState = null;
+
         this.pieceTexture = new CGFtexture(this.scene,  "images/piece.jpg");
 
         this.pieceRmaterial = new CGFappearance(this.scene);
@@ -361,16 +363,16 @@ class MyGameOrchestrator extends CGFobject {
 
     /* Function to undo move*/
     undoSequenceMove() {
+        this.previousGameState = this.gameState;
+
         var move = this.gameSequence.getLastPlay();
 
         if (move == -1) {
             return -1;
         }
         else {
-            //FAZER A ANIMAÇÃO INVERSA DO MOVE
-            this.gameSequence.undoMove();
-            
-            setTimeout(() => this.scene.pieces = this.gameSequence.getBoard(), 2500);
+
+            this.setGameState(gameStates.undo);
             
         }
     }
@@ -419,6 +421,8 @@ class MyGameOrchestrator extends CGFobject {
     /*Function to parse the definitions to start the game*/
 
     startGame() {
+
+        this.scene.timer.startTimer();
 
         if (this.scene.gameMode == "pvm") {
             if (this.scene.gameDifficulty == "medium") {
@@ -617,6 +621,8 @@ class MyGameOrchestrator extends CGFobject {
                 break;
 
             case gameStates.gameOver:
+                this.scene.timer.freezeTimer();
+                
                 var pointsP1 = this.countPoints(this.scene.listP1);
                 var pointsP2 = this.countPoints(this.scene.listP2);
                 if (pointsP1 > pointsP2) {
@@ -631,9 +637,14 @@ class MyGameOrchestrator extends CGFobject {
                 break;
 
             case gameStates.undo:
-                if (this.scene.gameMode == "pvp"  || this.scene.gameMode == "pvm") {
+                //FAZER A ANIMAÇÃO INVERSA DO MOVE
+                var move = this.gameSequence.getLastPlay();
+                
+                this.gameSequence.undoMove(move);
+            
+                setTimeout(() => this.scene.pieces = this.gameSequence.getBoard(), 2500);
+                setTimeout(() => this.setGameState(this.previousGameState), 4500);
 
-                }
 
             default:
                 break;

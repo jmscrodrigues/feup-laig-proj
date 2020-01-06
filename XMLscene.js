@@ -61,6 +61,7 @@ class XMLscene extends CGFscene {
 
         this.timer = new MyTimer(this, 5*60);
         this.controlPanel =  new MyControlPanel(this);
+
         this.announcementsPanel = new MyAnnouncementsPanel(this);
 
         this.ActiveCamera = 0;
@@ -73,29 +74,7 @@ class XMLscene extends CGFscene {
 
         this.gameOrchestrator.orchestrate();
 
-        //setInterval( () => this.controlPanel.setScore(this.gameOrchestrator.countPoints(this.listP1), this.gameOrchestrator.countPoints(this.listP2)), 10000);
-
-        //BOARD PARA TI, INCORRIGIVEL DO CRL
-
-        this.boardJustino = [];
-        this.indexJustino = 1;
-
-        for(var j = 0; j < 8; j++) {
-            for (var k = 0; k < 8; k++) {
-                if(j == 7 && k == 7) {
-                    
-                }
-                else {
-                    this.boardJustino.push(new MyPiece(this, j, k,this.indexJustino, this.gameOrchestrator.pieceRmaterial));
-                    this.indexJustino++;
-                }
-                
-            }
-        }
-
-
-
-        // FIM
+        //setInterval( () => this.controlPanel.setScore("0","0"), 10000);
         
         this.setPickEnabled(true);
     }
@@ -187,6 +166,12 @@ class XMLscene extends CGFscene {
                             this.gameOrchestrator.startGame();
                             
                         }
+
+                        else if(this.lastPicked == customId && (customId == 500)) {
+                            this.lastPicked = null;
+                            console.log("era suposto fazer alguma merda");
+                            this.gameOrchestrator.setGameState(gameStates.undo);
+                        }
 					}
 				}
 				this.pickResults.splice(0, this.pickResults.length);
@@ -265,14 +250,6 @@ class XMLscene extends CGFscene {
         this.currentScene.boardPosition();
         this.gameOrchestrator.display();
         this.popMatrix();
-
-        for(var kk = 0; kk < this.boardJustino.length; kk++) {
-            this.pushMatrix();
-            this.currentScene.piecesPosition();
-            this.boardJustino[kk].display();
-            this.popMatrix();
-
-        }
         // ---- END Primitive drawing section
     }
 }

@@ -81,11 +81,16 @@ class MyAnnouncementsPanel {
 
         this.scene.scale(0.9,1.1,0.9);
 
+        this.scene.registerForPick(500, this);
         this.undo.display();
+        this.scene.clearPickRegistration();   
+
 
         this.scene.rotate(Math.PI, 0, 0, 1);
 
+        this.scene.registerForPick(500, this);
         this.undo.display();
+        this.scene.clearPickRegistration(); 
 
         this.scene.popMatrix();
 
