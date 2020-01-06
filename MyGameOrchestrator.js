@@ -131,7 +131,12 @@ class MyGameOrchestrator extends CGFobject {
 
             this.gameSequence.addMove(new MyMove(xCoord, zCoord, data[1]));
 
-            this.PiecesAnimations.push(new MyPiecesAnimations(data[4],[0,3,0],4));
+
+            for (var s = 0; s < this.scene.piecesBoard.length; s++) {
+                if(this.scene.piecesBoard[s].getCoordX() == data[1] && 
+                this.scene.piecesBoard[s].getCoordY() == data[2])
+                    this.PiecesAnimations.push(new MyPiecesAnimations(this.scene.piecesBoard[s],[0,3,0],4));
+            }      
         };
 
         let requestString = 'move(' + xCoord + ',' + zCoord  + ',' + '[' + '[' + board[0] + ']' + ',' + '[' + board[1] + ']' + ',' + 
@@ -167,7 +172,11 @@ class MyGameOrchestrator extends CGFobject {
             this.gameSequence.addMove(new MyMove(data[2], data[3], data[4])); //ADICIONA A SEQUENCIA DO JOGO
 
 
-            this.PiecesAnimations.push(new MyPiecesAnimations(data[4],[0,3,0],4));
+            for (var s = 0; s < this.scene.piecesBoard.length; s++) {
+                if(this.scene.piecesBoard[s].getCoordX() == data[1] && 
+                this.scene.piecesBoard[s].getCoordY() == data[2])
+                    this.PiecesAnimations.push(new MyPiecesAnimations(this.scene.piecesBoard[s],[0,3,0],4));
+            }
 
             //REMOVER O APONTADOR PARA O TILE DA PEÇA
         };
@@ -225,7 +234,11 @@ class MyGameOrchestrator extends CGFobject {
             this.gameSequence.addMove(new MyMove(data[2], data[3], data[4])); //ADICIONA A SEQUENCIA DO JOGO
 
 
-            this.PiecesAnimations.push(new MyPiecesAnimations(data[4],[0,3,0],4));
+            for (var s = 0; s < this.scene.piecesBoard.length; s++) {
+                if(this.scene.piecesBoard[s].getCoordX() == data[1] && 
+                this.scene.piecesBoard[s].getCoordY() == data[2])
+                    this.PiecesAnimations.push(new MyPiecesAnimations(this.scene.piecesBoard[s],[0,3,0],4));
+            }
 
 
             //REMOVER O APONTADOR PARA O TILE DA PEÇA
@@ -639,7 +652,11 @@ class MyGameOrchestrator extends CGFobject {
 
             case gameStates.undo:
                 
-                this.PiecesAnimations.push(new MyPiecesAnimations(data[4],[0,0,0],4));
+                for (var s = 0; s < this.scene.piecesBoard.length; s++) {
+                    if(this.scene.piecesBoard[s].getCoordX() == data[1] && 
+                    this.scene.piecesBoard[s].getCoordY() == data[2])
+                        this.PiecesAnimations.push(new MyPiecesAnimations(this.scene.piecesBoard[s],[0,0,0],4));
+                }
 
                 var move = this.gameSequence.getLastPlay();
                 
