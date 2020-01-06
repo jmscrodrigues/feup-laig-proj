@@ -225,7 +225,7 @@ class XMLscene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-        explode
+       
 
         this.setDefaultAppearance();
 
