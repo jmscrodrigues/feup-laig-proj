@@ -15,6 +15,7 @@ class MyAnnouncementsPanel {
         this.annoucementBack = new MyButton (this.scene, 'images/rock.jpg');
 
         this.undo = new MyButton (this.scene, 'images/undo.png');
+        this.confirm = new MyButton (this.scene, 'images/confirm.png');
     }
 
     changeAnnoucement (annoucement) {
@@ -81,16 +82,11 @@ class MyAnnouncementsPanel {
 
         this.scene.scale(0.9,1.1,0.9);
 
-        this.scene.registerForPick(500, this);
         this.undo.display();
-        this.scene.clearPickRegistration();   
-
 
         this.scene.rotate(Math.PI, 0, 0, 1);
 
-        this.scene.registerForPick(500, this);
         this.undo.display();
-        this.scene.clearPickRegistration(); 
 
         this.scene.popMatrix();
 
