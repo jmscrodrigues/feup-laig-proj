@@ -25,7 +25,6 @@ class MyGameOrchestrator extends CGFobject {
 
         this.board = new MyBoard(this.scene);
         this.prolog = new MyPrologInterface(this.scene); 
-        this.announcements = new MyAnnouncementsPanel(this.scene);
         this.gameSequence = new MyGameSequence(this.scene);
 
         this.previousGameState = null;
@@ -582,11 +581,11 @@ class MyGameOrchestrator extends CGFobject {
             case gameStates.playerPlay:
                 console.log("Player Play");
                 if (this.scene.playerListPicker == 0) {
-                    this.announcements.changeAnnoucement("player1");
+                    this.scene.announcementsPanel.changeAnnoucement("player1");
                 }
 
                 else {
-                    this.announcements.changeAnnoucement("player2");
+                    this.scene.announcementsPanel.changeAnnoucement("player2");
 
                 }
 
@@ -596,7 +595,9 @@ class MyGameOrchestrator extends CGFobject {
                 console.log("Bot play");
 
                 this.gameSequence.setBoard(this.scene.pieces);
+                
 
+                //this.scene.announcementsPanel.changeAnnoucement("bot");
                 this.botPlay();
 
                 break;
