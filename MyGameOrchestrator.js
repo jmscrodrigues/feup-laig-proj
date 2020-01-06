@@ -16,6 +16,7 @@ class MyGameOrchestrator extends CGFobject {
     constructor(scene) {
         super(scene);
         
+        this.PiecesAnimations = new Array();
 
         this.gameState = gameStates.loadGame;
 
@@ -130,7 +131,7 @@ class MyGameOrchestrator extends CGFobject {
 
             this.gameSequence.addMove(new MyMove(xCoord, zCoord, data[1]));
 
-            //TODO: ANIMAÇÃO DO MOVE
+            this.PiecesAnimations.push(new MyPiecesAnimations(data[4],[0,3,0],4));
         };
 
         let requestString = 'move(' + xCoord + ',' + zCoord  + ',' + '[' + '[' + board[0] + ']' + ',' + '[' + board[1] + ']' + ',' + 
@@ -166,7 +167,7 @@ class MyGameOrchestrator extends CGFobject {
             this.gameSequence.addMove(new MyMove(data[2], data[3], data[4])); //ADICIONA A SEQUENCIA DO JOGO
 
 
-            //TODO: ANIMAÇÃO DO MOVE
+            this.PiecesAnimations.push(new MyPiecesAnimations(data[4],[0,3,0],4));
 
             //REMOVER O APONTADOR PARA O TILE DA PEÇA
         };
@@ -224,7 +225,7 @@ class MyGameOrchestrator extends CGFobject {
             this.gameSequence.addMove(new MyMove(data[2], data[3], data[4])); //ADICIONA A SEQUENCIA DO JOGO
 
 
-            //TODO: ANIMAÇÃO DO MOVE
+            this.PiecesAnimations.push(new MyPiecesAnimations(data[4],[0,3,0],4));
 
 
             //REMOVER O APONTADOR PARA O TILE DA PEÇA
@@ -637,7 +638,9 @@ class MyGameOrchestrator extends CGFobject {
                 break;
 
             case gameStates.undo:
-                //FAZER A ANIMAÇÃO INVERSA DO MOVE
+                
+                this.PiecesAnimations.push(new MyPiecesAnimations(data[4],[0,0,0],4));
+
                 var move = this.gameSequence.getLastPlay();
                 
                 this.gameSequence.undoMove(move);

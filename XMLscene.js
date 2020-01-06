@@ -194,6 +194,10 @@ class XMLscene extends CGFscene {
         this.scene1.update(t);
         this.timer.update(t);
         this.cameraAnimation.update(t);
+
+        for (var s = 0; s <   this.gameOrchestrator.PiecesAnimations.length; s++) {
+            this.gameOrchestrator.PiecesAnimations[s].update(t);
+        }
     }
 
     display() {
@@ -217,7 +221,11 @@ class XMLscene extends CGFscene {
         this.lights[0].update();
         // ---- BEGIN Primitive drawing section
 
-        
+        for (var s = 0; s <   this.gameOrchestrator.PiecesAnimations.length; s++) {
+            this.gameOrchestrator.PiecesAnimations[s].display();
+        }
+
+
         this.cameraAnimation.display(this.camera);
 
 
