@@ -1,9 +1,8 @@
 class MyPiecesAnimations {
-    constructor(currentLocation, finalLocation, elevation) {
-        this.Xdelta = finalLocation[0] - currentLocation[0];
-        this.Ydelta = finalLocation[2] - currentLocation[2];
+    constructor(Piece, finalLocation, elevation) {
+        this.Piece = Piece;
 
-        this.ZdeltaInitial = currentLocation[1] + elevation;
+        this.ZdeltaInitial = this.Piece.coordY + elevation;
         this.ZdeltaFinal = finalLocation[1] - elevation;
 
         this.finalLocation = finalLocation;
@@ -50,20 +49,16 @@ class MyPiecesAnimations {
         }
     }
 
-    display (position) {
+    display () {
         if(this.ready) {
             if(this.fase == 0) {
-                position[1] = position[1] + this.ZdeltaInitial*this.Tdelta;
-            }
-            else if (this.fase == 1) {
-                position[0] = position[0] + this.Xdelta*this.Tdelta;
-                position[2] = position[2] + this.Ydelta*this.Tdelta;
+                this.Piece.coordY =  this.Piece.coordY + this.ZdeltaInitial*this.Tdelta;
             }
             else if (this.fase == 2) {
-                position[1] = position[1] + this.ZdeltaFinal*this.Tdelta;
+                this.Piece.coordY =  this.Piece.coordY + this.ZdeltaFinal*this.Tdelta;
             }
             else if (this.fase == 3) {
-                position = this.finalLocation;
+                this.Piece.coordY = this.finalLocation[1];
             }
 
             this.ready = false;
