@@ -13,6 +13,8 @@ class MyAnnouncementsPanel {
 
         this.annoucementFront = new MyButton (this.scene, 'images/rock.jpg');
         this.annoucementBack = new MyButton (this.scene, 'images/rock.jpg');
+
+        this.undo = new MyButton (this.scene, 'images/undo.png');
     }
 
     changeAnnoucement (annoucement) {
@@ -59,6 +61,34 @@ class MyAnnouncementsPanel {
         this.annoucementFront.display();
 
         this.scene.popMatrix();
+
+
+        this.scene.pushMatrix();
+
+        this.scene.translate(0,3,0); 
+
+        this.scene.scale(2.5,1.5,0.3);
+
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+
+        this.panelFront.display();
+
+        this.scene.rotate(Math.PI, 0, 1, 0);
+
+        this.scene.rotate(Math.PI, 0, 0, 1);
+
+        this.panelBack.display();
+
+        this.scene.scale(0.9,1.1,0.9);
+
+        this.undo.display();
+
+        this.scene.rotate(Math.PI, 0, 0, 1);
+
+        this.undo.display();
+
+        this.scene.popMatrix();
+
     }
 
 

@@ -124,9 +124,8 @@ class MyScene2 {
     }
 
     piecesPosition() {
-        this.scene.translate(2,1.2,1.75);
+        this.scene.translate(2,1.2,-1.75);
         this.scene.scale(0.2,0.2,0.2);
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
     } 
 
     controlPanelPosition() {

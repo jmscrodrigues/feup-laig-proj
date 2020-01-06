@@ -69,6 +69,7 @@ class XMLscene extends CGFscene {
 
         this.gameOrchestrator = new MyGameOrchestrator(this);
 
+        
 
         this.gameOrchestrator.orchestrate();
 
@@ -224,9 +225,8 @@ class XMLscene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+        explode
 
-
-        //Apply default appearance
         this.setDefaultAppearance();
 
         this.lights[0].update();
@@ -267,7 +267,10 @@ class XMLscene extends CGFscene {
         this.popMatrix();
 
         for(var kk = 0; kk < this.boardJustino.length; kk++) {
+            this.pushMatrix();
+            this.currentScene.piecesPosition();
             this.boardJustino[kk].display();
+            this.popMatrix();
 
         }
         // ---- END Primitive drawing section
