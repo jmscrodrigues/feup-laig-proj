@@ -622,7 +622,7 @@ class MyGameOrchestrator extends CGFobject {
 
             case gameStates.gameOver:
                 this.scene.timer.freezeTimer();
-                
+
                 var pointsP1 = this.countPoints(this.scene.listP1);
                 var pointsP2 = this.countPoints(this.scene.listP2);
                 if (pointsP1 > pointsP2) {
@@ -643,6 +643,7 @@ class MyGameOrchestrator extends CGFobject {
                 this.gameSequence.undoMove(move);
             
                 setTimeout(() => this.scene.pieces = this.gameSequence.getBoard(), 2500);
+                console.log("CHEGUEI AQUI UEHUHWEUHEUHEU");
                 setTimeout(() => this.setGameState(this.previousGameState), 4500);
 
 

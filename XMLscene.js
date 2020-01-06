@@ -74,7 +74,7 @@ class XMLscene extends CGFscene {
 
         this.gameOrchestrator.orchestrate();
 
-        //setInterval( () => this.controlPanel.setScore("0","0"), 10000);
+        setInterval( () => this.controlPanel.setScore(this.gameOrchestrator.countPoints(this.listP1),this.gameOrchestrator.countPoints(this.listP2)), 10000);
         
         this.setPickEnabled(true);
     }
@@ -169,8 +169,7 @@ class XMLscene extends CGFscene {
 
                         else if(this.lastPicked == customId && (customId == 500)) {
                             this.lastPicked = null;
-                            console.log("era suposto fazer alguma merda");
-                            this.gameOrchestrator.setGameState(gameStates.undo);
+                            this.gameOrchestrator.undoSequenceMove;
                         }
 					}
 				}
