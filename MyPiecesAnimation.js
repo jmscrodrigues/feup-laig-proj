@@ -57,6 +57,9 @@ class MyPiecesAnimations {
             else if (this.fase == 2) {
                 this.Piece.coordY =  this.Piece.coordY + this.ZdeltaFinal*this.Tdelta;
             }
+            else if (this.fase == 3) {
+                this.Piece.coordY = this.finalLocation[1];
+            }
 
             this.ready = false;
         }
