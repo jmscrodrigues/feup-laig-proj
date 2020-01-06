@@ -54,6 +54,29 @@ class MyScene1 {
 
         this.waterShader = new CGFshader(this.scene.gl, "shaders/water.vert", "shaders/water.frag");
 
+
+
+        this.skyBoxUpTexture = new CGFtexture(this.scene,  "images/sea.jpg");
+        this.skyBoxFtTexture = new CGFtexture(this.scene,  "images/sea.jpg");
+        this.skyBoxBkTexture = new CGFtexture(this.scene,  "images/sea.jpg");
+        this.skyBoxLfTexture = new CGFtexture(this.scene,  "images/sea.jpg");
+        this.skyBoxRtTexture = new CGFtexture(this.scene,  "images/sea.jpg");
+
+        this.skyBoxUp = new MyPlane(this.scene, 30, 30);
+        this.skyBoxFt = new MyPlane(this.scene, 30, 30);
+        this.skyBoxBk = new MyPlane(this.scene, 30, 30);
+        this.skyBoxLf = new MyPlane(this.scene, 30, 30);
+        this.skyBoxRt = new MyPlane(this.scene, 30, 30);        
+        
+        this.whiteaterial = new CGFappearance(this.scene);
+        this.whiteaterial.setAmbient(1, 1, 1, 1.0);
+        this.whiteaterial.setDiffuse(1, 1, 1, 1.0);
+        this.whiteaterial.setSpecular(1, 1, 1, 1.0);
+        this.whiteaterial.setShininess(10.0);
+        this.whiteaterial.setTexture(this.skyBoxFtTexture);
+        this.whiteaterial.setTextureWrap('REPEAT','REPEAT');
+
+
         this.boatBody = new MyHexagonalPrism(this.scene, this.woodTexture);
         this.boatProw = new MyCylinder(this.scene, 1, 1, 0, 2, 6, 6);
         this.boarMast = new MyCylinder(this.scene, 1, 1, 1, 3, 6, 6);
@@ -90,13 +113,64 @@ class MyScene1 {
         this.waterTexture.bind(0);
         this.waterTexture2.bind(1);      
 
-        this.scene.scale(5,5,5);
+        this.scene.scale(20,5,20);
 
         this.water.display();
 
         this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
         
+        this.whiteaterial.apply();
+        this.whiteaterial.setTexture(this.skyBoxLfTexture);
+
+        this.scene.pushMatrix();
+        this.scene.scale(20,20,20);
+        this.scene.translate(0.5,0.5,0);
+        this.scene.rotate(Math.PI/2, 0,0, 1);
+        this.skyBoxLf.display();
+        this.scene.popMatrix();
+
+        this.whiteaterial.apply();
+        this.whiteaterial.setTexture(this.skyBoxRtTexture);
+
+        this.scene.pushMatrix();
+        this.scene.scale(20,20,20);
+        this.scene.translate(-0.5,0.5,0);
+        this.scene.rotate(-Math.PI/2, 0,0, 1);
+        this.skyBoxRt.display();
+        this.scene.popMatrix();
+       
+        this.whiteaterial.apply();
+        this.whiteaterial.setTexture(this.skyBoxFtTexture);
+
+        this.scene.pushMatrix();
+        this.scene.scale(20,20,20);
+        this.scene.translate(0,0.5,0.5);
+        this.scene.rotate(-Math.PI/2, 1,0, 0);
+        this.skyBoxFt.display();
+        this.scene.popMatrix();
+
+        this.whiteaterial.apply();
+        this.whiteaterial.setTexture(this.skyBoxBkTexture);
+
+        this.scene.pushMatrix();
+        this.scene.scale(20,20,20);
+        this.scene.translate(0,0.5,-0.5);
+        this.scene.rotate(Math.PI/2, 1,0, 0);
+        this.skyBoxBk.display();
+        this.scene.popMatrix();
+
+        this.whiteaterial.apply();
+        this.whiteaterial.setTexture(this.skyBoxUpTexture);
+
+        this.scene.pushMatrix();
+        this.scene.scale(20,20,20);
+        this.scene.translate(0,1,0);
+        this.scene.rotate(Math.PI, 1,0, 0);
+        this.skyBoxUp.display();
+        this.scene.popMatrix();
+
+
         this.scene.pushMatrix();
         this.woodmaterial.apply();
         this.scene.translate(0,1,0);

@@ -38,9 +38,9 @@ class MyControlPanel {
         this.player1Score = player1Score;
         this.player2Score = player2Score;
 
-        this.player1ScoreUnit.reTexture('images/' + this.player1Score + '.png');
+        this.player1ScoreUnit.reTexture(new CGFtexture(this.scene, ("images/" + this.player1Score + ".png")));
 
-        this.player2ScoreUnit.reTexture('images/' + this.player2Score + '.png');
+        this.player2ScoreUnit.reTexture(new CGFtexture(this.scene, ("images/" + this.player2Score + ".png")));
     }
 
     addScore1(score) {
