@@ -59,7 +59,7 @@ class XMLscene extends CGFscene {
 
         this.currentScene = this.scene1;
 
-        this.timer = new MyTimer(this, 5*60);
+        this.timer = new MyTimer(this, (59*60) + 59);
         this.controlPanel =  new MyControlPanel(this);
 
         this.announcementsPanel = new MyAnnouncementsPanel(this);
