@@ -133,8 +133,8 @@ class MyGameOrchestrator extends CGFobject {
 
 
             for (var s = 0; s < this.scene.piecesBoard.length; s++) {
-                if(this.scene.piecesBoard[s].getCoordX() == data[1] && 
-                this.scene.piecesBoard[s].getCoordY() == data[2])
+                if(this.scene.piecesBoard[s].getCoordX() == xCoord && 
+                this.scene.piecesBoard[s].getCoordZ() == zCoord)
                     this.PiecesAnimations.push(new MyPiecesAnimations(this.scene.piecesBoard[s],[0,3,0],4));
             }      
         };
@@ -173,8 +173,8 @@ class MyGameOrchestrator extends CGFobject {
 
 
             for (var s = 0; s < this.scene.piecesBoard.length; s++) {
-                if(this.scene.piecesBoard[s].getCoordX() == data[1] && 
-                this.scene.piecesBoard[s].getCoordY() == data[2])
+                if(this.scene.piecesBoard[s].getCoordX() == data[2] && 
+                this.scene.piecesBoard[s].getCoordZ() == data[3])
                     this.PiecesAnimations.push(new MyPiecesAnimations(this.scene.piecesBoard[s],[0,3,0],4));
             }
 
@@ -235,8 +235,8 @@ class MyGameOrchestrator extends CGFobject {
 
 
             for (var s = 0; s < this.scene.piecesBoard.length; s++) {
-                if(this.scene.piecesBoard[s].getCoordX() == data[1] && 
-                this.scene.piecesBoard[s].getCoordY() == data[2])
+                if(this.scene.piecesBoard[s].getCoordX() == data[2] && 
+                this.scene.piecesBoard[s].getCoordZ() == data[3])
                     this.PiecesAnimations.push(new MyPiecesAnimations(this.scene.piecesBoard[s],[0,3,0],4));
             }
 
@@ -652,11 +652,13 @@ class MyGameOrchestrator extends CGFobject {
 
             case gameStates.undo:
                 
+                /* 
                 for (var s = 0; s < this.scene.piecesBoard.length; s++) {
                     if(this.scene.piecesBoard[s].getCoordX() == data[1] && 
-                    this.scene.piecesBoard[s].getCoordY() == data[2])
+                    this.scene.piecesBoard[s].getCoordZ() == data[2])
                         this.PiecesAnimations.push(new MyPiecesAnimations(this.scene.piecesBoard[s],[0,0,0],4));
                 }
+                */
 
                 var move = this.gameSequence.getLastPlay();
                 
