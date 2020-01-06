@@ -610,7 +610,7 @@ class MyGameOrchestrator extends CGFobject {
                 this.gameSequence.setBoard(this.scene.pieces);
                 
 
-                //this.scene.announcementsPanel.changeAnnoucement("bot");
+                this.scene.announcementsPanel.changeAnnoucement("bot");
                 this.botPlay();
 
                 break;

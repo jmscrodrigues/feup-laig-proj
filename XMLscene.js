@@ -135,8 +135,10 @@ class XMLscene extends CGFscene {
                                 this.gameOrchestrator.setGameState(gameStates.gameOver);
                             }
 
-                            else if(this.pieces[this.pickResults[i][0].getCoordX()][this.pickResults[i][0].getCoordZ() == "*"] ) {
+                            else if(this.pieces[this.pickResults[i][0].getCoordX()][this.pickResults[i][0].getCoordZ()] == "*" ) {
                                 console.log("Already removed piece!");
+                                this.lastPicked == null;
+                                return;
                             }
 
                             for(var z = 0; z < this.validMoves.length; z++) {
